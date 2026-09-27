@@ -1,0 +1,1720 @@
+/* Reset Dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #181616;
+    color: #ffffff;
+    line-height: 1.6;
+    
+    /* TAMBAHKAN 2 BARIS INI: Mengunci layar agar tidak bisa geser ke samping */
+    overflow-x: hidden; 
+    max-width: 100%;
+    
+    /* Sembunyikan scrollbar untuk Firefox & Edge */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    
+    /* Mematikan fitur blok/seleksi teks */
+    -webkit-user-select: none; /* Safari, Chrome, Opera */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE/Edge lama */
+    user-select: none; /* Standar modern */
+}
+
+/* Sembunyikan scrollbar untuk Chrome, Safari, dan Opera */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* Navigasi Utama */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 30px 0; 
+    z-index: 1000;
+}
+
+/* Efek Gradient Blur (HyperOS Style) di belakang navigasi */
+nav::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px; /* Dibuat lebih tinggi dari nav agar punya ruang untuk gradasi pudar */
+    z-index: -1; /* Berada di bawah elemen navigasi */
+    
+    /* Efek kaca (Glassmorphism) */
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    
+    /* Gradasi gelap tipis dari atas ke bawah untuk memperkuat kontras teks saat melewati gambar terang */
+    background: linear-gradient(to bottom, rgba(24, 22, 22, 0.75) 0%, rgba(24, 22, 22, 0) 100%);
+    
+    /* KUNCI UTAMA: Masking agar efek blur-nya memudar halus (feathering) di area bawah */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+    
+    pointer-events: none; /* Pastikan tidak memblokir touch/click pada area navigasi */
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 180px; 
+    position: relative;
+}
+
+nav ul li a {
+    color: #555555;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 8px; /* Ruang untuk garis indikator */
+    z-index: 2;
+}
+
+/* Pengaturan dasar untuk memecah batas elemen agar blur tidak kotak */
+nav ul li a::before,
+nav ul li a::after {
+    content: attr(data-text);
+    position: absolute;
+    top: calc(100% + 2px); /* Posisi presisi persis di bawah garis merah */
+    left: -60px; 
+    right: -60px;
+    padding-top: 80px; /* Ruang kosong yang akan terlempar ke bawah setelah elemen dibalik */
+    text-align: center;
+    transform: scaleY(-1); /* Balik elemen dari tengah. Teks naik, ruang kosong turun */
+    color: inherit;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+/* Lapis 1: Dekat teks, pantulan jelas dan tajam */
+nav ul li a::before {
+    filter: blur(2px);
+    opacity: 0.8;
+    /* to top digunakan karena koordinat elemen sudah terbalik */
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 30%);
+    mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 30%);
+}
+
+/* Lapis 2: Jauh dari teks, blur menyebar luas menciptakan gradien */
+nav ul li a::after {
+    filter: blur(10px);
+    opacity: 0.5;
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 80%);
+    mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 80%);
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+/* Garis Merah Indikator Morphing */
+.nav-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background-color: #e04f5f;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(224, 79, 95, 0.8), 0 4px 15px rgba(224, 79, 95, 0.5);
+    /* Transisi standar dikendalikan dari JS */
+    z-index: 10;
+    width: 0;
+    pointer-events: none; 
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; 
+}
+
+/* KETIKA MENCIUT MENJADI TITIK (Tahap Antara) */
+.nav-indicator.shrink-dot {
+    height: 8px; /* Sama tinggi & lebar agar menjadi lingkaran */
+    border-radius: 50%; /* Membuatnya benar-benar bulat */
+    bottom: -2px; /* Geser sedikit agar tetap sentris vertikal terhadap garis asli */
+    background-color: #ffffff; /* Berubah putih sebentar sebelum meledak jadi wadah merah/gelap */
+    box-shadow: 0 0 20px #ffffff; /* Cahaya silau sesaat */
+}
+
+/* KETIKA MENG-EXPAND DI PORTFOLIO */
+.nav-indicator.expand {
+    height: 45px;
+    
+    /* Gunakan properti bottom (jangan diubah ke top) agar transisi vertikal dari garis tidak terputus */
+    bottom: -50px; 
+    
+    background-color: rgba(24, 22, 22, 0.8); 
+    border: 1px solid #e04f5f; 
+    border-radius: 30px; 
+    pointer-events: auto; 
+    box-shadow: 0 5px 20px rgba(224, 79, 95, 0.2);
+    backdrop-filter: blur(10px);
+    
+    /* PENTING: Jangan tambahkan position: fixed di sini karena akan merusak perhitungan transisi CSS */
+}
+
+/* Pembungkus Icon di dalam pil */
+.subtab-icons {
+    display: flex;
+    gap: 12px;
+    opacity: 0; /* Sembunyikan default */
+    transition: opacity 0.3s ease;
+    transition-delay: 0s;
+}
+
+.nav-indicator.expand .subtab-icons {
+    opacity: 1; /* Munculkan saat expand */
+    transition-delay: 0.2s; /* Munculnya telat sedikit menunggu pil melebar dulu */
+}
+
+/* Desain Ikon di dalam Subtab */
+.subtab-icons img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    cursor: pointer;
+    /* Dibuat abu-abu dan redup secara default agar elegan */
+    filter: grayscale(100%) opacity(0.6); 
+    transition: all 0.3s ease;
+}
+
+/* Interaksi Hover pada ikon */
+.subtab-icons img:hover {
+    filter: grayscale(0%) opacity(1); /* Menyala full color saat disentuh */
+    transform: scale(1.2) translateY(-2px);
+}
+
+/* 
+  EFEK BLUR GRADIENT REFLECTION PADA GARIS MERAH 
+*/
+/* Pengaturan Khusus Home Section (3D Depth/Parallax) */
+#home {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    
+    /* TAMBAHKAN SATU BARIS INI: Kanvas gelap agar blending GIF berfungsi */
+    background-color: #121212;
+
+    /* Menggunakan rgba murni untuk menghindari bug render 'transparent' di browser */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
+}
+/* --- EFEK REVEAL SAAT TEKS DESKRIPSI DI-HOVER --- */
+/* @media ini memastikan efek hover hanya aktif di layar lebar (PC/Laptop), dan mati total di HP */
+@media (min-width: 769px) {
+    /* 1. Teks deskripsi bergeser ke kanan dan warnanya menjadi lebih terang */
+    .hero-info:hover {
+        color: rgba(255, 255, 255, 0.8);
+        margin-left: 450px; 
+        width: 55%;
+        max-width: 1200px;
+        text-align: right;
+    }
+
+    /* 2. Saat teks di-hover, geser GIF Eclipse ke kiri */
+    .hero-info:hover ~ .hero-eclipse {
+        margin-left: -750px; 
+        opacity: 0.5; 
+    }
+
+    /* 3. Saat teks di-hover, geser Teks INNAVERO ke kiri */
+    .hero-info:hover ~ .hero-bg-text {
+        margin-left: 50px; 
+        opacity: 1;
+    }
+
+    /* 4. Saat teks di-hover, geser Gambar Utama ke kiri */
+    .hero-info:hover ~ .hero-image {
+        margin-left: -650px; 
+        filter: blur(5px) brightness(0.6); 
+    }
+
+    /* 5. Saat teks di-hover, geser Teks ALLOI XTUS ke kiri */
+    .hero-info:hover ~ .hero-fg-text {
+        margin-left: -150px; 
+        opacity: 1;
+    }
+}
+
+/* Background gambar profil blur (pengganti ::before) */
+.hero-background {
+    position: absolute;
+    z-index: 0;
+    
+    /* Ukuran dilebihkan dari layar dan ditarik ke minus agar ujungnya tidak bolong saat digeser parallax */
+    top: -20vh; 
+    left: -10vw;
+    width: 120vw;
+    height: 150vh;
+    
+    background-image: url('assets/foto-profil.png');
+    
+    /* Pengaturan ukuran dan posisi manual sama seperti sebelumnya */
+    background-size: 130%; 
+    background-position: 25% 45%; 
+    background-repeat: no-repeat;
+    
+    filter: blur(30px);
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+/* Z-Index 1: Info Data Diri */
+.hero-info {
+    position: absolute;
+    z-index: 1;
+    width: 75%;
+    max-width: 1200px;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.2); 
+    line-height: 1.8;
+    /* Tambahkan pendaran tipis untuk teks kecil */
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
+    
+    /* Wajib dinyalakan agar teks bisa mendeteksi kursor/hover */
+    pointer-events: auto; 
+    
+    /* Animasi pergeseran yang mulus */
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Z-Index 2: GIF Eclipse */
+.hero-eclipse {
+    position: absolute;
+    z-index: 2;
+    width: 650px; 
+    height: auto;
+    object-fit: contain;
+    margin-top: -350px; 
+    margin-left: -100px; 
+    pointer-events: none; 
+    opacity: 1;
+    mix-blend-mode: color-dodge;
+    filter: blur(3px);
+    
+    /* Animasi transisi */
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Z-Index 3: Teks INNAVERO */
+.hero-bg-text {
+    position: absolute;
+    z-index: 3;
+    font-family: 'Inria Serif', serif;
+    font-size: 2vw;
+    font-weight: 700;
+    letter-spacing: 0px;
+    color: rgba(255, 255, 255, 0.25);
+    filter: blur(2px);
+    margin-top: 650px; 
+    margin-left: 540px;
+    /* Tambahkan pendaran lebar untuk teks belakang */
+    text-shadow: 0 0 60px rgba(255, 255, 255, 0.25);
+    
+    /* Animasi transisi */
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Z-Index 4: Gambar Utama */
+.hero-image {
+    position: absolute;
+    z-index: 4;
+    height: 180vh; 
+    width: auto;
+    object-fit: cover;
+    margin-top: 25vh; 
+    pointer-events: none; /* Penting: agar kursor bisa tembus ke teks di belakangnya */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: transform;
+    
+    /* Animasi transisi */
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Z-Index 5: Teks ALLOI XTUS */
+.hero-fg-text {
+    position: absolute;
+    z-index: 5;
+    font-family: 'Inria Serif', serif;
+    font-size: 4vw;
+    font-weight: 700;
+    letter-spacing: 8px;
+    color: #ffffff9c;
+    /* Timpa text-shadow lama. 
+       Baris 1: Bayangan hitam untuk kedalaman 3D 
+       Baris 2 & 3: Ambient glow putih lebar */
+    text-shadow: 0 10px 30px rgba(0,0,0,0.8), 
+                 0 0 60px rgba(255, 255, 255, 0.15), 
+                 0 0 120px rgba(255, 255, 255, 0.55);
+    margin-top: 550px; 
+    margin-left: 340px;
+    
+    /* Animasi transisi */
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Pengaturan Section Umum */
+section {
+    min-height: 100vh;
+    padding: 100px 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative; 
+}
+
+h1, h2 {
+    margin-bottom: 20px;
+}
+
+.skill-container {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.skill-text {
+    flex: 1;
+}
+
+.skill-visual-placeholder {
+    flex: 1;
+    height: 300px;
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.portfolio-item {
+    height: 400px;
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+}
+
+/* Eksekusi paksa hilangkan scrollbar di semua area */
+html, body {
+    -ms-overflow-style: none !important; /* IE dan Edge */
+    scrollbar-width: none !important; /* Firefox */
+    
+    /* KUNCI ANTI-GESER: Mematikan paksa pergerakan layar ke samping */
+    overflow-x: hidden !important; 
+    max-width: 100vw !important;
+}
+
+html::-webkit-scrollbar, body::-webkit-scrollbar, *::-webkit-scrollbar {
+    display: none !important; /* Chrome, Safari, dan Opera */
+}
+
+/* =========================================
+   ABOUT SECTION (SLIDE 2)
+========================================= */
+#about {
+    background-color: #121212; /* Kanvas gelap untuk blending */
+    
+    /* Wajib: Memotong elemen yang keluar dari batas kotak About */
+    overflow: hidden; 
+    
+    /* Efek Wipe Feather: Memudar di 15% bagian atas dan 15% bagian bawah */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+}
+
+/* Background gambar profil blur untuk About */
+.about-background {
+    position: absolute;
+    z-index: 0;
+    
+    /* Ukuran dilebihkan agar tidak bolong saat bergeser */
+    top: -20vh; 
+    left: 30vw;
+    width: 80vw;
+    height: 150vh;
+    
+    /* Menggunakan gambar profil kedua */
+    background-image: url('assets/foto-profil-2.png');
+    
+    background-size: 100%; 
+    background-position: 75% 50%; /* Digeser agak ke kanan menyesuaikan posisi asli subjek */
+    background-repeat: no-repeat;
+    
+    filter: blur(30px);
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+/* Gambar Kanan */
+.about-image {
+    position: absolute;
+    z-index: 2;
+    height: 100vh; /* Besarkan/kecilkan ini untuk zoom gambar */
+    width: auto;
+    right: 5%; /* Nempel ke sisi kanan */
+    margin-top: 15vh;
+    pointer-events: none;
+}
+
+/* GIF Eclipse About */
+.about-eclipse {
+    position: absolute;
+    z-index: 1;
+    width: 650px;
+    right: -2%; 
+    margin-top: -210px;
+    pointer-events: none;
+    mix-blend-mode: color-dodge; /* Blending agar cahaya menyatu */
+    filter: blur(3px);
+    opacity: 1;
+}
+
+/* Teks Foreground (Heading) */
+.about-heading {
+    position: absolute;
+    z-index: 4;
+    font-family: 'Inria Serif', serif;
+    font-size: 2.5vw;
+    margin-left: 110px;
+    font-weight: 700;
+    color: #ffffff9c;
+    /* Timpa text-shadow lama. 
+       Kombinasi bayangan hitam dan ambient glow lebar */
+    text-shadow: 0 5px 15px rgba(0,0,0,0.8), 
+                 0 0 60px rgba(255, 255, 255, 0.15), 
+                 0 0 120px rgba(255, 255, 255, 0.25);
+}
+
+/* Teks Background (Isi) */
+.about-desc {
+    position: absolute;
+    z-index: 3;
+    font-size: 1vw;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.6;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
+}
+
+/* POSISI MANUAL DESKTOP (Angka ini mengatur posisi susun zig-zag sesuai screenshot) */
+.h-1 { margin-top: -250px; left: 15%; }
+.d-1 { margin-top: -150px; left: 25%; }
+
+.h-2 { margin-top: 60px; left: 5%; }
+.d-2 { margin-top: 240px; left: 15%; }
+
+.h-3 { margin-top: 450px; left: 30%; }
+.d-3 { margin-top: 550px; left: 40%; }
+
+/* =========================================
+   SKILL SECTION (SLIDE 3)
+========================================= */
+#skill {
+    background-color: #121212;
+    overflow: hidden; 
+    
+    /* Efek Wipe Feather (Sama dengan About) */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+}
+
+/* Background & Objek Visual Skill */
+.skill-background {
+    position: absolute;
+    z-index: 0;
+    top: -20vh; left: -10vw;
+    width: 120vw; height: 150vh;
+    background-image: url('assets/foto-profil.png');
+    background-size: 130%; 
+    background-position: 25% 45%; 
+    background-repeat: no-repeat;
+    filter: blur(30px);
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+.skill-eclipse {
+    position: absolute;
+    z-index: 1;
+    width: 650px; height: auto;
+    object-fit: contain;
+    margin-top: -350px; margin-left: 140px; 
+    pointer-events: none; 
+    mix-blend-mode: color-dodge;
+    filter: blur(3px);
+}
+
+.skill-image {
+    position: absolute;
+    z-index: 3;
+    height: 180vh; width: auto;
+    object-fit: cover;
+    margin-top: 25vh; 
+    margin-left: 50px;
+    pointer-events: none;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+/* Tipografi Skill */
+/* Default PC: Sembunyikan teks versi mobile */
+.text-mobile {
+    display: none;
+}
+.skill-bg-text {
+    position: absolute;
+    z-index: 2;
+    font-family: 'Inria Serif', serif;
+    font-size: 3vw; font-weight: 700;
+    color: rgba(255, 255, 255, 0.25);
+    filter: blur(3px);
+    margin-top: 600px; margin-left: 640px;
+    text-shadow: 0 0 60px rgba(255, 255, 255, 0.1);
+}
+
+.skill-fg-text {
+    position: absolute;
+    z-index: 4;
+    font-family: 'Inria Serif', serif;
+    font-size: 4vw; font-weight: 700; letter-spacing: 8px;
+    color: #ffffff9c;
+    margin-top: 550px; margin-left: 340px;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 60px rgba(255, 255, 255, 0.15), 0 0 120px rgba(255, 255, 255, 0.05);
+}
+
+/* --------------------------------------
+   SLIDER SOFTWARE (DIPISAH)
+-------------------------------------- */
+:root {
+    /* 1. KETEBALAN REL & BULATAN */
+    --slider-thickness: 10px; 
+    --slider-thumb-size: 22px; 
+    
+    /* 2. JARAK KIRI-KANAN (Icon ke Rel) */
+    --slider-icon-gap: 20px; 
+    
+    /* 3. JARAK ATAS-BAWAH ANTAR SOFTWARE */
+    --slider-start-pos: -320px; 
+    --slider-vertical-gap: 150px; 
+
+    /* 4. GESER SEMUA SLIDER HORIZONTAL BARENGAN */
+    --slider-shift-x: 250px; /* Isi angka positif (misal 5% atau 50px) untuk geser semua ke KANAN, angka negatif untuk ke KIRI */
+}
+
+.slider-item {
+    position: absolute;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: var(--slider-icon-gap); 
+    width: 350px; 
+}
+
+/* POSISI ZIG-ZAG DESKTOP & RUMUS JARAK OTOMATIS */
+.s-1 { right: calc(38% - var(--slider-shift-x)); margin-top: calc(var(--slider-start-pos) + (var(--slider-vertical-gap) * 0)); }
+.s-2 { right: calc(41% - var(--slider-shift-x)); margin-top: calc(var(--slider-start-pos) + (var(--slider-vertical-gap) * 1)); }
+.s-3 { right: calc(40% - var(--slider-shift-x)); margin-top: calc(var(--slider-start-pos) + (var(--slider-vertical-gap) * 2)); }
+.s-4 { right: calc(33% - var(--slider-shift-x)); margin-top: calc(var(--slider-start-pos) + (var(--slider-vertical-gap) * 3)); }
+.s-5 { right: calc(34% - var(--slider-shift-x)); margin-top: calc(var(--slider-start-pos) + (var(--slider-vertical-gap) * 4)); }
+.s-6 { right: calc(28% - var(--slider-shift-x)); margin-top: calc(var(--slider-start-pos) + (var(--slider-vertical-gap) * 5)); }
+.s-7 { right: calc(25% - var(--slider-shift-x)); margin-top: calc(var(--slider-start-pos) + (var(--slider-vertical-gap) * 6)); }
+.s-8 { right: calc(27% - var(--slider-shift-x)); margin-top: calc(var(--slider-start-pos) + (var(--slider-vertical-gap) * 7)); }
+
+/* (Pastikan class .slider-icon, .slider-track, .slider-fill, dan .slider-thumb masih ada di bawah ini dengan menggunakan pemanggil var() seperti kode sebelumnya) */
+
+.slider-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+}
+
+.slider-track {
+    flex: 1;
+    height: var(--slider-thickness); /* Ketebalan membaca variabel */
+    background-color: rgba(255, 255, 255, 0.2); 
+    border-radius: 10px;
+    position: relative;
+}
+
+.slider-fill {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    width: var(--percent); 
+    background: linear-gradient(90deg, #3b5998, #5a7bd5); 
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(90, 123, 213, 0.6);
+}
+
+.slider-thumb {
+    position: absolute;
+    top: 50%;
+    left: var(--percent); 
+    transform: translate(-50%, -50%); 
+    width: var(--slider-thumb-size); /* Ukuran bulatan membaca variabel */
+    height: var(--slider-thumb-size);
+    background-color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* --- UI INDIKATOR PERSENTASE --- */
+.slider-value {
+    position: absolute;
+    bottom: 25px; /* Jarak mengambang di atas bulatan */
+    left: 50%;
+    transform: translateX(-50%); /* Agar persis di tengah bulatan */
+    
+    background-color: #3b5998; /* Warna latar (biru tua) */
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    
+    /* Keadaan awal: tembus pandang */
+    opacity: 0; 
+    pointer-events: none; /* Agar tidak mengganggu klik */
+}
+
+/* Segitiga kecil di bawah kotak (Pointer) */
+.slider-value::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 4px;
+    border-style: solid;
+    border-color: #3b5998 transparent transparent transparent;
+}
+
+/* --- ANIMASI MEMUNCULKAN INDIKATOR --- */
+@keyframes showIndicator {
+    0%   { opacity: 0; bottom: 15px; } 
+    5%   { opacity: 1; bottom: 25px; } /* Muncul dengan cepat di awal */
+    85%  { opacity: 1; bottom: 25px; } /* Ditahan agak lama agar user sempat baca */
+    100% { opacity: 0; bottom: 35px; } /* Perlahan menghilang ke atas di detik-detik terakhir */
+}
+
+/* Panggil animasi indikator BERSAMAAN dengan mulainya animasi bar slider */
+.animate-slider .slider-value {
+    /* Durasi diperpanjang menjadi 4 detik */
+    animation: showIndicator 4s ease forwards;
+}
+
+/* Sesuaikan delay indikator agar sinkron dengan delay masing-masing baris */
+.s-1 .slider-value { animation-delay: 0.1s; }
+.s-2 .slider-value { animation-delay: 0.2s; }
+.s-3 .slider-value { animation-delay: 0.3s; }
+.s-4 .slider-value { animation-delay: 0.4s; }
+.s-5 .slider-value { animation-delay: 0.5s; }
+.s-6 .slider-value { animation-delay: 0.6s; }
+.s-7 .slider-value { animation-delay: 0.7s; }
+.s-8 .slider-value { animation-delay: 0.8s; }
+
+/* --- ANIMASI SLIDER DENGAN OVERSHOOT & DELAY --- */
+
+/* Keyframe untuk isi biru (fill) */
+@keyframes fillOvershoot {
+    0% { width: 0%; }
+    /* Titik overshoot (melewati batas asli) */
+    70% { width: calc(var(--percent) + 5%); } 
+    100% { width: var(--percent); }
+}
+
+/* Keyframe untuk bulatan putih (thumb) */
+@keyframes thumbOvershoot {
+    0% { left: 0%; }
+    /* Titik overshoot (melewati batas asli) */
+    70% { left: calc(var(--percent) + 5%); } 
+    100% { left: var(--percent); }
+}
+
+/* Keadaan awal sebelum animasi jalan: */
+.slider-fill {
+    width: 0%; /* Bar warna biru mulai dari lebar 0 */
+}
+
+.slider-thumb {
+    left: 0%; /* Bulatan putih mulai dari posisi kiri, tapi ukurannya tetap normal! */
+}
+
+/* Saat class .animate-slider ditambahkan, jalankan animasi */
+.animate-slider .slider-fill {
+    animation: fillOvershoot 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.animate-slider .slider-thumb {
+    animation: thumbOvershoot 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Memberikan delay yang berbeda-beda untuk tiap baris agar tidak bebarengan (Staggered) */
+.s-1 .slider-fill, .s-1 .slider-thumb { animation-delay: 0.1s; }
+.s-2 .slider-fill, .s-2 .slider-thumb { animation-delay: 0.2s; }
+.s-3 .slider-fill, .s-3 .slider-thumb { animation-delay: 0.3s; }
+.s-4 .slider-fill, .s-4 .slider-thumb { animation-delay: 0.4s; }
+.s-5 .slider-fill, .s-5 .slider-thumb { animation-delay: 0.5s; }
+.s-6 .slider-fill, .s-6 .slider-thumb { animation-delay: 0.6s; }
+.s-7 .slider-fill, .s-7 .slider-thumb { animation-delay: 0.7s; }
+.s-8 .slider-fill, .s-8 .slider-thumb { animation-delay: 0.8s; }
+
+/* =========================================
+   CREATIVE FIELD SECTION (SLIDE 4)
+========================================= */
+:root {
+    /* PENGATURAN GLOBAL CREATIVE FIELD */
+    --cf-gap-x: -30px; /* Jarak horizontal antar platform (minus agar saling tumpang tindih) */
+    --cf-header-gap: 15px; /* Jarak antara icon/username dengan gambar konten di bawahnya */
+    
+    --cf-global-scale: 1.2; /* Perbesar/perkecil seluruh grup (1 = 100%) */
+    --cf-global-y: 0px; /* Geser seluruh grup vertikal (atas/bawah) */
+    --cf-global-x: 0px; /* Geser seluruh grup horizontal (kiri/kanan) */
+}
+
+#creative-field {
+    background-color: #121212;
+    overflow: hidden; 
+    
+    /* Efek Wipe Feather konsisten */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Pembungkus Utama Grup 3D */
+.cf-container {
+    position: relative;
+    height: 1250px; /* Wajib diberi tinggi pasti karena semua isinya akan melayang (absolute) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    scale: var(--cf-global-scale); 
+    transform: translate(var(--cf-global-x), var(--cf-global-y));
+    
+    width: 100%;
+    z-index: 5;
+}
+
+/* Base Card (Berlaku untuk semua) */
+.cf-card {
+    position: absolute; 
+    width: 320px; 
+    cursor: pointer; 
+    
+    /* Tambahkan 'filter' ke dalam daftar animasi agar perubahan blur terasa sangat mulus saat bertukar posisi */
+    transition: scale 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                translate 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                filter 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                z-index 0.5s;
+}
+
+/* Header (Icon + Teks) */
+.cf-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; 
+    margin-bottom: var(--cf-header-gap);
+}
+
+.cf-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.cf-username {
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+.cf-image {
+    width: 100%;
+    height: auto;
+}
+
+/* --------------------------------------
+   PENGATURAN INDIVIDU (FAKE 3D - ABSOLUTE)
+-------------------------------------- */
+/* Kiri Luar (IG 1) */
+.c-1 { 
+    scale: 0.6; 
+    z-index: 1; 
+    opacity: 0.3; 
+    translate: -360px 0; 
+    filter: blur(8px); /* Blur tebal untuk posisi paling belakang */
+}
+
+/* Kiri Dalam (IG 2) */
+.c-2 { 
+    scale: 0.8; 
+    z-index: 2; 
+    opacity: 0.6; 
+    translate: -180px 0; 
+    filter: blur(3px); /* Blur sedang */
+}
+
+/* Tengah (SociaBuzz) */
+.c-3 { 
+    scale: 1.1; 
+    z-index: 3; 
+    opacity: 1; 
+    translate: 0 0; 
+    filter: blur(0px); /* Fokus tajam sempurna (tanpa blur) */
+}
+
+/* Kanan Dalam (TikTok) */
+.c-4 { 
+    scale: 0.8; 
+    z-index: 2; 
+    opacity: 0.6; 
+    translate: 180px 0; 
+    filter: blur(3px); /* Blur sedang */
+}
+
+/* Kanan Luar (YouTube) */
+.c-5 { 
+    scale: 0.6; 
+    z-index: 1; 
+    opacity: 0.3; 
+    translate: 360px 0; 
+    filter: blur(8px); /* Blur tebal untuk posisi paling belakang */
+}
+
+/* =========================================
+   PORTFOLIO SECTION & WIREFRAME LAYOUTS
+========================================= */
+#portfolio {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 150px; /* Menyediakan ruang agar tidak tertutup Navbar */
+}
+
+/* Scrollbox Khusus Portfolio */
+.portfolio-container {
+    width: 100%;
+    height: 75vh;
+    /* KUNCI: Biarkan gambar raksasa menembus batas wadah tanpa dipotong kaku */
+    overflow: visible; 
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+/* Desain Custom Scrollbar khusus Portfolio */
+.portfolio-container::-webkit-scrollbar { width: 6px; }
+.portfolio-container::-webkit-scrollbar-thumb { background: #e04f5f; border-radius: 10px; }
+
+/* Kategori Tampilan (Menyembunyikan yang tidak aktif) */
+.port-category {
+    display: none; 
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeInPortfolio 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+.port-category.active { display: flex; }
+
+@keyframes fadeInPortfolio {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Desain Dasar Wireframe */
+.wireframe {
+    background-color: rgba(40, 40, 40, 0.8);
+    border: 2px dashed #666;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #999;
+    font-weight: 600;
+    letter-spacing: 2px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+}
+.wireframe:hover { border-color: #e04f5f; color: #fff; }
+
+/* Wrapper untuk Tumpukan (Stacking) */
+.stack-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60vh;
+}
+
+/* 1. After Effects (2 Tumpuk, 16:9, Besar) */
+.wf-ae { 
+    position: absolute; 
+    aspect-ratio: 16/9; 
+    width: 60vw; 
+    max-width: 900px; 
+    border: none; /* Hilangkan garis putus-putus */
+    background-color: transparent; 
+    overflow: hidden; /* Pastikan video tidak meluber keluar dari batas radius */
+    border-radius: 15px;
+}
+
+.port-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none; /* KUNCI UTAMA: Agar event scroll dan klik tembus ke div .wf-ae pembungkusnya */
+}
+
+.ae-bg { z-index: 1; transform: scale(0.9) translate(-40px, -30px); opacity: 0.5; filter: blur(3px); pointer-events: none; }
+.ae-fg { z-index: 2; transform: scale(1) translate(20px, 20px); pointer-events: auto; cursor: pointer; }
+
+/* Class umum untuk semua gambar di dalam card portofolio */
+.port-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    border-radius: 15px; 
+    pointer-events: none; 
+    /* TAMBAHKAN INI: Memastikan gambar mengisi penuh wireframe-nya */
+    display: block; 
+}
+
+/* =========================================================
+   2. ILLUSTRATOR (3 Kartu Berjajar Horizontal)
+========================================================= */
+.wf-ai { 
+    position: absolute; 
+    
+    /* Gunakan aspect-ratio agar proporsinya stabil */
+    aspect-ratio: 1 / 1.6; 
+    width: 25vw; 
+    max-width: 350px; 
+    
+    /* Kunci titik tumpu di tengah layar */
+    top: 50%;
+    left: 50%;
+    
+    border: none; 
+    background-color: transparent; 
+    box-shadow: none; 
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
+}
+
+/* POSISI BERJAJAR (CAROUSEL HORIZONTAL) KHUSUS DESKTOP */
+
+/* Kartu Paling Kiri (Belakang) */
+.ai-3 { z-index: 1; transform: translate(calc(-50% - 200px), -20%) scale(0.8); opacity: 0.1; filter: blur(6px); }
+
+/* Kartu Kanan (Agak Depan) */
+.ai-2 { z-index: 2; transform: translate(calc(-50% + 200px), -20%) scale(0.8); opacity: 0.4; filter: blur(3px); }
+
+/* Kartu Tengah (Terdepan) */
+/* Tanpa box-shadow sesuai permintaanmu */
+.ai-1 { z-index: 3; transform: translate(-50%, 10%) scale(2); opacity: 1; filter: blur(0px); }
+
+/* 3. Photoshop (2 Tumpuk, Morphing Dipisah per Gambar) */
+.wf-ps { 
+    position: absolute; 
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
+    border: none; 
+    background-color: transparent; 
+    box-shadow: none; 
+    top: 50%;
+    left: 50%;
+}
+
+/* Pengaturan Dasar Opacity & Blur (Depan vs Belakang) */
+.ps-2 { z-index: 1; opacity: 0.4; filter: blur(4px); }
+.ps-1 { z-index: 2; opacity: 1; filter: blur(0px); }
+
+/* =========================================================
+   A. KARTU HORIZONTAL (PS2/Tangan) - Urutan Pertama
+========================================================= */
+.wf-ps:nth-child(1) {
+    width: 32vw; 
+    max-width: 450px; 
+    aspect-ratio: 16/9; /* Wujud horizontal */
+}
+/* Posisi saat di belakang */
+.wf-ps:nth-child(1).ps-2 { transform: translate(calc(-50% - 50px), calc(-50% - 40px)) scale(0.85); }
+/* Posisi saat di DEPAN (Dibiarkan normal di tengah) */
+.wf-ps:nth-child(1).ps-1 { transform: translate(-50%, calc(-50% + 220px)) scale(4); }
+
+/* =========================================================
+   B. KARTU VERTIKAL PANJANG (PS1/Lumpia) - Urutan Kedua
+========================================================= */
+.wf-ps:nth-child(2) {
+    width: 26vw; 
+    max-width: 380px; 
+    aspect-ratio: 1 / 2.1; /* Wujud vertical panjang */
+}
+/* Posisi saat di belakang */
+.wf-ps:nth-child(2).ps-2 { transform: translate(calc(-35% - 50px), calc(-50% - 40px)) scale(0.35); }
+/* Posisi saat di DEPAN (Diturunkan sesuai maumu agar muat) */
+.wf-ps:nth-child(2).ps-1 { transform: translate(-50%, calc(-50% + 320px)) scale(1.6); } /* <--- Sesuaikan angka +20px ini untuk desktop jika kurang turun */
+
+/* =========================================================
+   4. FIGMA (5 Tumpuk: 1 Horizontal, 4 Vertical)
+========================================================= */
+
+/* A. SETTING GLOBAL (Mengubah sifat semua kartu sekaligus) */
+.wf-figma { 
+    position: absolute; 
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
+    border: none; 
+    background-color: transparent; 
+    box-shadow: none; 
+    top: 50%;
+    left: 50%;
+}
+
+/* B. SETTING INDIVIDU (Mengatur Ukuran & Rasio Permanen per Gambar) */
+/* fg4.png sampai fg1.png (Rasio Vertical) */
+.wf-figma:nth-child(1),
+.wf-figma:nth-child(2),
+.wf-figma:nth-child(3),
+.wf-figma:nth-child(4) { 
+    width: 36vw; 
+    max-width: 320px; 
+    aspect-ratio: 9/16; 
+}
+/* fgmain.png (Rasio Horizontal) */
+.wf-figma:nth-child(5) { 
+    width: 45vw; 
+    max-width: 750px; 
+    aspect-ratio: 16/9; 
+}
+
+/* C. POSISI BERJAJAR (CAROUSEL HORIZONTAL) KHUSUS DESKTOP */
+/* Semua kartu diatur scale-nya sama rata, yang berubah hanya posisi X dan Y serta blur-nya */
+
+/* Kartu Paling Kiri (Jauh) */
+.fg-5 { 
+    z-index: 1; 
+    transform: translate(calc(-50% - 400px), -50%) scale(0.7); 
+    opacity: 0.1; 
+    filter: blur(8px); 
+}
+/* Kartu Kiri (Agak Dekat) */
+.fg-4 { 
+    z-index: 2; 
+    transform: translate(calc(-50% - 250px), -50%) scale(0.85); 
+    opacity: 0.4; 
+    filter: blur(4px); 
+}
+/* Kartu Kanan (Agak Dekat) */
+.fg-3 { 
+    z-index: 2; 
+    transform: translate(calc(-50% + 250px), -50%) scale(0.85); 
+    opacity: 0.4; 
+    filter: blur(4px); 
+}
+/* Kartu Paling Kanan (Jauh) */
+.fg-2 { 
+    z-index: 1; 
+    transform: translate(calc(-50% + 400px), -50%) scale(0.7); 
+    opacity: 0.1; 
+    filter: blur(8px); 
+}
+
+/* D. POSISI DEPAN (TEPAT DI TENGAH) KHUSUS DESKTOP */
+/* DIPISAH ANTARA VERTICAL & HORIZONTAL AGAR RAPI */
+
+/* 1. Saat 4 Gambar Vertical maju ke TENGAH */
+.wf-figma:nth-child(1).fg-1,
+.wf-figma:nth-child(2).fg-1,
+.wf-figma:nth-child(3).fg-1,
+.wf-figma:nth-child(4).fg-1 { 
+    z-index: 5; 
+    transform: translate(-50%, -50%) scale(1); 
+    opacity: 1; 
+    filter: blur(0px);
+}
+
+/* 2. Saat Gambar Horizontal (fgmain) maju ke TENGAH */
+.wf-figma:nth-child(5).fg-1 { 
+    z-index: 5; 
+    transform: translate(-50%, calc(-50% + 20px)) scale(1); 
+    opacity: 1; 
+    filter: blur(0px);
+}
+
+/* =========================================================
+   6. BLENDER (3 Berjajar Horizontal Kesamping)
+========================================================= */
+.wf-blend { 
+    position: absolute; 
+    aspect-ratio: 16/9; 
+    width: 25vw; 
+    max-width: 400px; 
+    
+    /* Kunci titik tumpu tepat di tengah layar */
+    top: 50%;
+    left: 50%;
+    
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    border: none; 
+    background-color: transparent; 
+    box-shadow: none; 
+}
+
+/* Kartu Paling Kiri */
+.bl-3 { z-index: 1; transform: translate(calc(-50% - 32vw), -50%) scale(0.85); opacity: 0.3; filter: blur(4px); }
+
+/* Kartu Paling Kanan */
+.bl-2 { z-index: 2; transform: translate(calc(-50% + 32vw), -50%) scale(0.85); opacity: 0.3; filter: blur(4px); }
+
+/* Kartu Tengah (Utama) */
+.bl-1 { z-index: 3; transform: translate(-50%, -50%) scale(1.2); opacity: 1; filter: blur(0px); box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+
+/* =========================================================
+   8. OBS (3 Berjajar Kesamping Horizontal)
+========================================================= */
+.wf-obs { 
+    position: absolute; 
+    aspect-ratio: 9/16; 
+    width: 20vw; /* Lebar dikecilkan sedikit agar muat berjajar 3 */
+    max-width: 300px; 
+    
+    top: 50%;
+    left: 50%;
+    
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    border: none; 
+    background-color: transparent; 
+    box-shadow: none; 
+    
+    /* Tambahan agar ujung video membulat mengikuti wireframe */
+    overflow: hidden; 
+    border-radius: 15px;
+}
+
+/* POSISI BERJAJAR (CAROUSEL HORIZONTAL) KHUSUS DESKTOP */
+
+/* Kartu Kiri (Belakang) */
+.ob-3 { 
+    z-index: 1; 
+    /* Digeser ke kiri jauh dan sedikit ke atas */
+    transform: translate(calc(-50% - 25vw), -55%) scale(0.8); 
+    opacity: 0.2; 
+    filter: blur(5px); 
+}
+
+/* Kartu Kanan (Belakang) */
+.ob-2 { 
+    z-index: 2; 
+    /* Digeser ke kanan jauh dan sedikit ke atas */
+    transform: translate(calc(-50% + 25vw), -55%) scale(0.8); 
+    opacity: 0.5; 
+    filter: blur(3px); 
+}
+
+/* Kartu Depan (Center mutlak) */
+.ob-1 { 
+    z-index: 3; 
+    transform: translate(-50%, -50%) scale(1.1); 
+    opacity: 1; 
+    filter: blur(0px); 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8); 
+}
+/* =========================================================
+   5. IBIS PAINT (4 Kartu Berjajar Horizontal)
+========================================================= */
+.wf-ibis { 
+    position: absolute; 
+    aspect-ratio: 3/4; 
+    width: 25vw; 
+    max-width: 350px; 
+    
+    /* Kunci titik tumpu di tengah layar agar mekar merata */
+    top: 50%;
+    left: 50%;
+    
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    border: none; 
+    background-color: transparent; 
+    box-shadow: none; 
+}
+
+/* POSISI BERJAJAR (CAROUSEL HORIZONTAL) KHUSUS DESKTOP */
+
+/* Kartu Kiri Jauh (Paling Belakang) */
+.ib-4 { z-index: 1; transform: translate(calc(-50% - 350px), -50%) scale(0.65); opacity: 0.1; filter: blur(6px); }
+
+/* Kartu Kanan */
+.ib-3 { z-index: 2; transform: translate(calc(-50% + 220px), -50%) scale(0.8); opacity: 0.4; filter: blur(3px); }
+
+/* Kartu Kiri */
+.ib-2 { z-index: 3; transform: translate(calc(-50% - 220px), -50%) scale(0.8); opacity: 0.4; filter: blur(3px); }
+
+/* Kartu Tengah (Depan) */
+.ib-1 { z-index: 4; transform: translate(-50%, -20%) scale(2); opacity: 1; filter: blur(0px); }
+
+/* =========================================================
+   7. ALIGHT MOTION (1 Video Horizontal 16:9)
+========================================================= */
+.wf-am { 
+    position: absolute; 
+    aspect-ratio: 16/9; 
+    width: 60vw; 
+    max-width: 900px; 
+    
+    /* Kunci tepat di tengah layar */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    border: none; 
+    background-color: transparent; 
+    overflow: hidden; /* Mencegah ujung video keluar dari radius */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+/* Active Icon Highlight untuk Subtab */
+.port-icon.active-icon {
+    filter: grayscale(0%) opacity(1);
+    transform: scale(1.15) translateY(-2px);
+    background-color: rgba(224, 79, 95, 0.2);
+    border-radius: 5px;
+    padding: 2px;
+}
+
+/* =========================================
+   LAYOUT KHUSUS MOBILE / VERTICAL (HP)
+========================================= */
+@media (max-width: 768px) {
+    /* =========================================================
+       Responsif Figma HP (FIX TOTAL: POSISI DEPAN DIPISAH)
+    ========================================================= */
+    
+    /* 1. Paksa titik tumpu tepat di tengah layar */
+    .wf-figma {
+        top: 40% !important;
+        left: 50% !important;
+        margin: 0 !important;
+    }
+
+    /* 2. Kunci Ukuran Dasar Kartu Vertikal (fg4, fg3, fg2, fg1) */
+    .wf-figma:nth-child(1),
+    .wf-figma:nth-child(2),
+    .wf-figma:nth-child(3),
+    .wf-figma:nth-child(4) { 
+        width: 60vw !important; 
+        aspect-ratio: 9/16 !important; 
+    }
+    
+    /* 3. Kunci Ukuran Dasar Kartu Horizontal (fgmain) */
+    .wf-figma:nth-child(5) { 
+        width: 90vw !important; 
+        aspect-ratio: 16/9 !important; 
+    }
+    
+    /* 4. POSISI KARTU BELAKANG (Sama untuk semua agar rapi saat antre) */
+    .wf-figma.fg-5 { transform: translate(calc(-50% - 0px), calc(-50% - -50px)) scale(0.3) !important; opacity: 0.1; z-index: 1; }
+    .wf-figma.fg-4 { transform: translate(calc(-50% - 0px), calc(-50% - -50px)) scale(0.4) !important; opacity: 0.3; z-index: 2; }
+    .wf-figma.fg-3 { transform: translate(calc(-50% - 0px), calc(-50% - -50px)) scale(0.5) !important; opacity: 0.6; z-index: 3; }
+    .wf-figma.fg-2 { transform: translate(calc(-50% - 0px), calc(-50% - -50px)) scale(0.6) !important; opacity: 0.8; z-index: 4; }
+    
+    /* 5. POSISI DEPAN (DIPISAH ANTARA VERTICAL & HORIZONTAL) */
+    
+    /* A. Saat 4 Gambar Vertical maju ke depan */
+    .wf-figma:nth-child(1).fg-1,
+    .wf-figma:nth-child(2).fg-1,
+    .wf-figma:nth-child(3).fg-1,
+    .wf-figma:nth-child(4).fg-1 { 
+        /* Bebas atur translate Y dan scale khusus gambar Vertical */
+        transform: translate(-55%, calc(-50% + 15px)) scale(1.3) !important; 
+        opacity: 1; z-index: 5; 
+    }
+
+    /* B. Saat Gambar Horizontal (fgmain) maju ke depan */
+    .wf-figma:nth-child(5).fg-1 { 
+        /* Bebas atur translate Y dan scale khusus gambar Horizontal agar pas */
+        transform: translate(-55%, calc(-70% + 40px)) scale(.9) !important; 
+        opacity: 1; z-index: 5; 
+    }
+    
+    /* A. KARTU HORIZONTAL (PS2/Tangan) di HP */
+    .wf-ps:nth-child(1) {
+        width: 85vw; 
+        aspect-ratio: auto; 
+    }
+    .wf-ps:nth-child(1).ps-2 { transform: translate(calc(-50% - 15px), calc(-50% - 30px)) scale(0.85); }
+    /* Saat di depan, posisinya normal di tengah */
+    .wf-ps:nth-child(1).ps-1 { transform: translate(-57%, calc(-40% + 25px)) scale(1.2); } 
+
+    /* B. KARTU VERTIKAL PANJANG (PS1/Lumpia) di HP */
+    .wf-ps:nth-child(2) {
+        width: 90vw; 
+        aspect-ratio: 1 / 2.1; 
+    }
+    .wf-ps:nth-child(2).ps-2 { transform: translate(calc(-50% - 15px), calc(-50% - -50px)) scale(0.25); }
+    /* Saat di depan, DITURUNKAN +170px SEPERTI YANG KAMU SETTING! */
+    .wf-ps:nth-child(2).ps-1 { transform: translate(-57%, calc(-50% + 220px)) scale(1.2); }
+
+    .wf-ps .port-img {
+        height: auto !important;
+    }
+
+    /* =========================================================
+       Responsif Blender HP (Berjajar Kebawah / Vertical Carousel)
+    ========================================================= */
+    .wf-blend { 
+        width: 85vw !important; 
+        aspect-ratio: 16/9 !important;
+        
+        /* Kunci mutlak di tengah layar agar mekar merata */
+        top: 40% !important;
+        left: 50% !important;
+        margin: 0 !important;
+    }
+    
+    /* Kartu Atas */
+    .wf-blend.bl-3 { transform: translate(-50%, calc(-50% - 170px)) scale(0.8) !important; opacity: 0.3; z-index: 1; filter: blur(3px); }
+    
+    /* Kartu Bawah */
+    .wf-blend.bl-2 { transform: translate(-50%, calc(-50% + 200px)) scale(0.8) !important; opacity: 0.3; z-index: 2; filter: blur(3px); }
+    
+    /* Kartu Tengah (Active) */
+    .wf-blend.bl-1 { transform: translate(-50%, calc(-50% + 20px)) scale(1.15) !important; opacity: 1; z-index: 3; filter: blur(0px); box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+
+    /* =========================================================
+       Responsif OBS HP (3 Tumpuk Vertical Anti-Geser)
+    ========================================================= */
+    .wf-obs { 
+        width: 65vw !important; 
+        aspect-ratio: 9/16 !important;
+        
+        top: 50% !important;
+        left: 50% !important;
+        margin: 0 !important;
+        height: auto !important;
+    }
+    
+    /* Kartu Paling Belakang (Miring ke Kiri Atas) */
+    .wf-obs.ob-3 { transform: translate(calc(-50% - 30px), calc(-50% - 45px)) scale(0.75) !important; opacity: 0.2; z-index: 1; filter: blur(5px); }
+    
+    /* Kartu Tengah */
+    .wf-obs.ob-2 { transform: translate(calc(-50% - 15px), calc(-50% - 20px)) scale(0.9) !important; opacity: 0.5; z-index: 2; filter: blur(2px); }
+    
+    /* Kartu Depan (Center mutlak) */
+    .wf-obs.ob-1 { transform: translate(-60%, calc(-60% + 20px)) scale(1.1) !important; opacity: 1; z-index: 3; filter: blur(0px); box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+    /* Penyesuaian Pill Subtab Portfolio untuk HP */
+    .nav-indicator.expand {
+        height: 290px; 
+        
+        /* 1. Mengatur posisi agar lebih ke tengah (tidak terlalu ke atas) */
+        bottom: -480px; 
+        
+        /* 2. Menggeser sedikit ke kanan (ubah nilai vh atau px jika ingin digeser lagi) */
+        transform: translateX(24px); 
+        
+        /* 3. Mengecilkannya lagi sedikit (dari 50px ke 42px atau sesuaikan) */
+        width: 42px !important; 
+        
+        flex-direction: column; 
+        border-radius: 25px; 
+    }
+    
+    .subtab-icons {
+        flex-direction: column; /* Ikon ikut berbaris vertikal */
+        gap: 12px;
+    }
+    
+    .subtab-icons img {
+        width: 20px;
+        height: 20px;
+    }
+    
+    /* Responsif Wireframe Portfolio HP */
+    .wf-ae { width: 90vw; }
+    .ae-bg { transform: scale(0.8) translate(-30px, -25px); }
+    .ae-fg { transform: scale(0.9) translate(-30px, -65px); }
+    
+    /* =========================================================
+       Responsif Illustrator HP (BEBAS SCALE ANTI-GESER)
+    ========================================================= */
+    .wf-ai { 
+        width: 60vw !important; 
+        max-width: none !important; /* Hapus paksaan batas dari desktop */
+        height: auto !important; /* Hapus paksaan tinggi 1200px dari desktop */
+        aspect-ratio: 1 / 1.6 !important; 
+        
+        top: 40% !important;
+        left: 50% !important;
+        margin: 0 !important; 
+    }
+
+    /* Susunan tumpukan belakang */
+    .wf-ai.ai-3 { transform: translate(calc(-50% - 25px), calc(-50% - 35px)) scale(0.8) !important; opacity: 0.3; z-index: 1; filter: blur(4px); }
+    .wf-ai.ai-2 { transform: translate(calc(-50% - 15px), calc(-50% - 20px)) scale(0.9) !important; opacity: 0.6; z-index: 2; filter: blur(2px); }
+    
+    /* POSISI DEPAN: Sekarang kamu bebas ganti scale(1.4) menjadi berapapun tanpa takut UI rusak! */
+    .wf-ai.ai-1 { transform: translate(-62%, calc(0% + 40px)) scale(2.2) !important; opacity: 1; z-index: 3; filter: blur(0px); }
+    .wf-ps { width: 95vw; }
+    
+    .figma-main { width: 95vw; }
+    .figma-sub { width: 180px; }
+    
+    /* =========================================================
+       Responsif Ibis Paint HP (Tumpukan Miring, FIX Anti Geser)
+    ========================================================= */
+    .wf-ibis { 
+        width: 55vw !important; 
+        aspect-ratio: 3/4 !important;
+        /* WAJIB KUNCI TITIK TENGAH */
+        top: 50% !important;
+        left: 50% !important;
+        margin: 0 !important;
+    }
+    
+    /* Tumpukan berjejer miring dari kiri atas ke tengah bawah */
+    .wf-ibis.ib-4 { transform: translate(calc(-50% - 30px), calc(-50% - 40px)) scale(0.7) !important; opacity: 0.2; z-index: 1; filter: blur(3px); }
+    .wf-ibis.ib-3 { transform: translate(calc(-50% - 20px), calc(-50% - 30px)) scale(0.8) !important; opacity: 0.4; z-index: 2; filter: blur(2px); }
+    .wf-ibis.ib-2 { transform: translate(calc(-50% - 10px), calc(-50% - 20px)) scale(0.9) !important; opacity: 0.7; z-index: 3; filter: blur(1px); }
+    
+    /* Kartu terdepan di posisi tengah */
+    .wf-ibis.ib-1 { transform: translate(-65%, calc(-20% + -35px)) scale(2) !important; opacity: 1; z-index: 4; filter: blur(0px); }
+    
+    .wf-blend, .wf-obs { width: 95vw; }
+    /* =========================================================
+       Responsif Alight Motion HP
+    ========================================================= */
+    .wf-am { 
+        width: 80vw !important; 
+        aspect-ratio: 16/9 !important;
+        
+        top: 35% !important;
+        left: 41% !important;
+        margin: 0 !important;
+        /* Diturunkan 20px agar tidak menabrak teks atau navigasi */
+        transform: translate(-50%, calc(-50% + 20px)) !important; 
+    }
+    /* =========================================
+       SKILL SECTION - MOBILE
+    ========================================= */
+    /* Tukar teks dari versi PC ke Mobile di Tab Skill */
+    .text-desktop {
+        display: none;
+    }
+    .text-mobile {
+        display: inline;
+    }
+    .skill-background {
+        background-position: center center;
+    }
+
+    .skill-image {
+        height: 100vh;
+        margin-top: 20vh;
+        margin-left: 0;
+        opacity: 0; /* Diredupkan agar bar slider terbaca jelas */
+    }
+
+    .skill-eclipse {
+        width: 350px;
+        margin-top: -150px;
+        margin-left: 0;
+        opacity: 0; /* Diredupkan agar bar slider terbaca jelas */
+    }
+
+    .skill-bg-text {
+        font-size: 14vw;
+        margin-top: -480px;
+        left: 0;
+        margin-left: -30px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .skill-fg-text {
+        font-size: 12vw;
+        letter-spacing: 4px;
+        margin-top: -420px;
+        left: 0;
+        margin-left: 80px;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Penyesuaian Slider untuk HP */
+    :root {
+        /* Timpa variabel khusus untuk layar HP */
+        --slider-start-pos: -300px; /* Diturunkan ke bawah teks */
+        --slider-vertical-gap: 120px; /* Jarak antar baris dirapatkan untuk layar kecil */
+    }
+
+    .slider-item {
+        width: 80%; 
+        right: auto !important; 
+        left: 10% !important; 
+    }
+
+    .slider-icon {
+        width: 25px; 
+        height: 25px;
+    }
+    
+    /* (Hapus semua kode .s-1 { margin-top: 300px; } dkk yang kutulis sebelumnya dari area mobile ini karena posisinya sudah otomatis dihitung oleh CSS!) */
+    /* =========================================
+       ABOUT SECTION - MOBILE
+    ========================================= */
+    /* Perbaiki Background Blur About di HP */
+    .about-background {
+        background-position: center center;
+    }
+
+    .about-image {
+        height: 90vh;
+        right: -40%; /* Geser ke kanan agar tidak menutupi seluruh layar HP */
+        margin-top: 30vh;
+        opacity: 1; /* Gelapkan gambar profil agar teks tetap terbaca */
+    }
+
+    .about-eclipse {
+        width: 450px;
+        right: -50%;
+        margin-top: -5vh;
+    }
+
+    .about-heading {
+        font-size: 6vw; /* Perbesar font heading di HP */
+        left: -22% !important; /* Paksa rata kiri semua */
+    }
+
+    .about-desc {
+        font-size: 2.8vw;
+        left: 7% !important;
+        width: 90%; /* Maksimalkan margin teks ke sisi kanan */
+    }
+
+    /* POSISI MANUAL MOBILE (Disusun lurus ke bawah) */
+    .h-1 { margin-top: -500px; }
+    .d-1 { margin-top: -440px; }
+
+    .h-2 { margin-top: -190px; }
+    .d-2 { margin-top: -70px; width: 60%; }
+
+    .h-3 { margin-top: 160px; }
+    .d-3 { margin-top: 250px; width: 50%; }
+    /* 1. Atur Menu Navigasi (Memperbesar area sentuh/touch target untuk jempol) */
+    nav ul {
+        gap: 5px; /* Jarak antar menu diperkecil sedikit agar padding tidak berdesakan */
+    }
+    nav ul li a {
+        font-size: 13px;
+        
+        /* MEMPERLUAS AREA SENTUH KIRI, KANAN, DAN ATAS (Bawah tetap 8px agar garis merah tidak rusak) */
+        padding-top: 20px; 
+        padding-bottom: 8px; 
+        padding-left: 10px;
+        padding-right: 10px;
+        
+        /* Mengembalikan posisinya ke atas karena kita tadi menambahkan padding-top 20px */
+        margin-top: -20px; 
+        
+        /* Menghilangkan kedipan kotak warna (highlight) bawaan browser HP saat dipencet */
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* 2. Atur Gambar Utama Karakter */
+    .hero-image {
+        height: 120vh; /* Tinggi gambar disusutkan untuk HP */
+        margin-top: 30vh; /* Geser atas-bawah */
+        /* margin-left dinonaktifkan agar otomatis ke tengah */
+        margin-left: -30vh; 
+    }
+
+    /* 3. Atur GIF Eclipse */
+    .hero-eclipse {
+        width: 380px; /* Ukuran GIF diperkecil */
+        margin-top: -120px; /* Geser atas-bawah */
+        margin-left: -300px; /* Reset ke tengah */
+    }
+
+    /* 4. Atur Teks Belakang (INNAVERO) */
+    .hero-bg-text {
+        font-size: 10vw; /* Font diubah ke satuan ukuran layar HP yang lebih besar */
+        margin-top: -500px; /* Geser atas-bawah */
+        
+        /* Teknik memaksa teks ke tengah layar HP */
+        left: 0;
+        margin-left: 75px; 
+        width: 100%;
+        text-align: center;
+    }
+
+    /* 5. Atur Teks Depan (ALLOI XTUS) */
+    .hero-fg-text {
+        font-size: 12vw; 
+        letter-spacing: 4px; /* Jarak huruf dirapatkan agar tidak terpotong */
+        margin-top: -550px; /* Geser atas-bawah */
+        
+        /* Teknik memaksa teks ke tengah layar HP */
+        left: 0;
+        margin-left: -15px;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* 6. Atur Info Teks Paragraf */
+    .hero-info {
+        width: 55%; /* Lebar teks dimaksimalkan untuk layar HP */
+        font-size: 10px; /* Ukuran font dibesarkan sedikit agar mudah dibaca */
+        margin-top: 20px; /* Geser atas-bawah */
+        
+        /* Teknik memaksa teks ke tengah layar HP */
+        left: 35%; /* Menjaga teks tetap di tengah (karena width 90%) */
+        margin-left: 25px;
+        text-align: right;
+    }
+    
+    /* 7. Perbaiki Background Blur */
+    .hero-background {
+        background-position: center center;
+    }
+}

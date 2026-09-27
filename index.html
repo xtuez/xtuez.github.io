@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Alloi Xtus</title>
+    
+    <!-- Google Fonts: Poppins & Inria Serif -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:wght@300;400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Hubungkan ke file CSS eksternal -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigasi -->
+    <nav>
+        <ul>
+            <li><a href="#home" class="active" data-text="Home">Home</a></li>
+            <li><a href="#about" data-text="About">About</a></li>
+            <li><a href="#skill" data-text="Skill">Skill</a></li>
+            <li><a href="#creative-field" data-text="Creative Field">Creative Field</a></li>
+            <li><a href="#portfolio" data-text="Portfolio">Portfolio</a></li>
+            
+            <!-- Indikator yang akan Expand -->
+            <div class="nav-indicator">
+                <!-- Subtab Icons -->
+                <div class="subtab-icons">
+                    <img src="assets/after-effects.png" alt="After Effects" class="port-icon active-icon" data-target="port-ae">
+                    <img src="assets/illustrator.png" alt="Illustrator" class="port-icon" data-target="port-ai">
+                    <img src="assets/photoshop.png" alt="Photoshop" class="port-icon" data-target="port-ps">
+                    <img src="assets/figma.png" alt="Figma" class="port-icon" data-target="port-figma">
+                    <img src="assets/ibis-paint.png" alt="Ibis Paint" class="port-icon" data-target="port-ibis">
+                    <img src="assets/blender.png" alt="Blender" class="port-icon" data-target="port-blender">
+                    <img src="assets/alight-motion.png" alt="Alight Motion" class="port-icon" data-target="port-am">
+                    <img src="assets/obs.png" alt="OBS" class="port-icon" data-target="port-obs">
+                </div>
+            </div>
+        </ul>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+        <!-- Z-Index 0: Background Blur (Paling Belakang, Parallax Paling Lambat) -->
+        <div class="parallax hero-background" data-speed="0.8"></div>
+
+        <!-- Z-Index 1: Info Data Diri -->
+        <p class="parallax hero-info" data-speed="0.6">Saya Alloi Xtus Innavero biasa dipanggil dengan nama “Xtus” keahlian saya di bidang Editing Video, Motion Graphic, dan Redraw di Ibis Paint untuk kebutuhan editing. Saya memiliki sedikit keahlian prompting dalam vibe-coding yang juga digunakan untuk menunjang efisiensi waktu dalam proses Editing Video, VFX, dan Motion Graphic. Saya juga bisa membuat 3D model low poly object, yang biasa digunakan untuk membuat Music Video dan Motion Graphic. Untuk Realtime software atau Broadcasting saya ahli dalam menggunakan OBS Studio yang biasa dibarengi dengan motion graphic atau flyer yang sudah di buat sebelumnya pada software editing. Software yang biasa saya gunakan adalah Adobe After Effects, Adobe Illustrator, Adobe Photoshop, Figma, Blender 3D, Open Broadcaster Software (OBS), dan sebagian adalah software android apabila membutuhkan flexibilitas seperti Alight Motion, dan Ibis Paint</p>
+        
+        <!-- Z-Index 2: GIF Eclipse (Tanpa div pembungkus!) -->
+        <img src="assets/eclipse.gif" alt="Eclipse" class="parallax hero-eclipse" data-speed="0.4">
+
+        <!-- Z-Index 3: Teks INNAVERO -->
+        <h1 class="parallax hero-bg-text" data-speed="0.3">INNAVERO</h1>
+        
+        <!-- Z-Index 4: Gambar Utama (Tengah) -->
+        <img src="assets/foto-profil.png" alt="Alloi Xtus" class="parallax hero-image" data-speed="0">
+        
+        <!-- Z-Index 5: Teks ALLOI XTUS (Paling Depan) -->
+        <h1 class="parallax hero-fg-text" data-speed="-0.4">ALLOI XTUS</h1>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <!-- Z-Index 0: Background Blur About (Paling Belakang, Parallax Paling Lambat) -->
+        <div class="parallax about-background" data-speed="0.8"></div>
+
+        <!-- Z-Index 1: GIF Eclipse (Siapkan di posisi kanan) -->
+        <img src="assets/eclipse.gif" alt="Eclipse" class="parallax about-eclipse" data-speed="0.4">
+        
+        <!-- Z-Index 2: Gambar Profil Kedua -->
+        <!-- Pastikan nama file ini sesuai dengan yang kamu taruh di folder assets -->
+        <img src="assets/foto-profil-2.png" alt="Alloi Xtus 2" class="parallax about-image" data-speed="0.1">
+
+        <!-- Z-Index 3 & 4: Teks 1 (Fokus Utama) -->
+        <h2 class="parallax about-heading h-1" data-speed="-0.1">Fokus Utama:</h2>
+        <p class="parallax about-desc d-1" data-speed="0.3">Video Editing, Motion Graphics, VFX, dan<br>3D Low-Poly Modeling.</p>
+
+        <!-- Z-Index 3 & 4: Teks 2 (Keahlian Pendukung) -->
+        <h2 class="parallax about-heading h-2" data-speed="0.1">Keahlian<br>Pendukung:</h2>
+        <p class="parallax about-desc d-2" data-speed="0.3">Live Broadcasting (OBS Studio), Redraw Digital, dan AI Prompting<br>(Vibe-coding) untuk efisiensi workflow.</p>
+
+        <!-- Z-Index 3 & 4: Teks 3 (Software) -->
+        <h2 class="parallax about-heading h-3" data-speed="-0.3">Software:</h2>
+        <p class="parallax about-desc d-3" data-speed="0.3">Adobe Suite (After Effects, Illustrator, Photoshop),<br>Figma, Blender 3D, OBS, Alight Motion, dan Ibis Paint.</p>
+    </section>
+
+    <!-- Skill Section -->
+    <section id="skill">
+        <!-- Z-Index 0: Background Blur -->
+        <div class="parallax skill-background" data-speed="0.8"></div>
+
+        <!-- Z-Index 1: GIF Eclipse -->
+        <img src="assets/eclipse.gif" alt="Eclipse" class="parallax skill-eclipse" data-speed="0.4">
+
+        <!-- Z-Index 2: Teks Belakang -->
+        <h1 class="parallax skill-bg-text" data-speed="0.3">
+            <span class="text-desktop">INNAVERO</span>
+            <span class="text-mobile">My Skills</span>
+        </h1>
+        
+        <!-- Z-Index 3: Gambar Utama (Tengah) -->
+        <img src="assets/foto-profil.png" alt="Alloi Xtus" class="parallax skill-image" data-speed="0">
+        
+        <!-- Z-Index 4: Teks Depan -->
+        <h1 class="parallax skill-fg-text" data-speed="-0.4">
+            <span class="text-desktop">ALLOI XTUS</span>
+            <span class="text-mobile">Guwe</span>
+        </h1>
+
+        <!-- Z-Index 5: Slider Kemampuan Software (SEKARANG DIPISAH SATU PER SATU) -->
+        
+        <!-- After Effects (s-1) -->
+        <div class="parallax slider-item s-1" data-speed="0.1">
+            <img src="assets/after-effects.png" alt="After Effects" class="slider-icon">
+            <div class="slider-track">
+                <div class="slider-fill" style="--percent: 90%;"></div>
+                <div class="slider-thumb" style="--percent: 90%;">
+                    <div class="slider-value">0%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Illustrator (s-2) -->
+        <div class="parallax slider-item s-2" data-speed="0.2">
+            <img src="assets/illustrator.png" alt="Illustrator" class="slider-icon">
+            <div class="slider-track">
+                <div class="slider-fill" style="--percent: 75%;"></div>
+                <div class="slider-thumb" style="--percent: 75%;">
+                    <div class="slider-value">0%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photoshop (s-3) -->
+        <div class="parallax slider-item s-3" data-speed="0.3">
+            <img src="assets/photoshop.png" alt="Photoshop" class="slider-icon">
+            <div class="slider-track">
+                <div class="slider-fill" style="--percent: 35%;"></div>
+                <div class="slider-thumb" style="--percent: 35%;">
+                    <div class="slider-value">0%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Figma (s-4) -->
+        <div class="parallax slider-item s-4" data-speed="0.4">
+            <img src="assets/figma.png" alt="Figma" class="slider-icon">
+            <div class="slider-track">
+                <div class="slider-fill" style="--percent: 85%;"></div>
+                <div class="slider-thumb" style="--percent: 85%;">
+                    <div class="slider-value">0%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ibis Paint (s-5) -->
+        <div class="parallax slider-item s-5" data-speed="0.5">
+            <img src="assets/ibis-paint.png" alt="Ibis Paint" class="slider-icon">
+            <div class="slider-track">
+                <div class="slider-fill" style="--percent: 75%;"></div>
+                <div class="slider-thumb" style="--percent: 75%;">
+                    <div class="slider-value">0%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blender 3D (s-6) -->
+        <div class="parallax slider-item s-6" data-speed="0.6">
+            <img src="assets/blender.png" alt="Blender" class="slider-icon">
+            <div class="slider-track">
+                <div class="slider-fill" style="--percent: 45%;"></div>
+                <div class="slider-thumb" style="--percent: 45%;">
+                    <div class="slider-value">0%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alight Motion (s-7) -->
+        <div class="parallax slider-item s-7" data-speed="0.7">
+            <img src="assets/alight-motion.png" alt="Alight Motion" class="slider-icon">
+            <div class="slider-track">
+                <div class="slider-fill" style="--percent: 70%;"></div>
+                <div class="slider-thumb" style="--percent: 70%;">
+                    <div class="slider-value">0%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OBS Studio (s-8) -->
+        <div class="parallax slider-item s-8" data-speed="0.8">
+            <img src="assets/obs.png" alt="OBS Studio" class="slider-icon">
+            <div class="slider-track">
+                <div class="slider-fill" style="--percent: 85%;"></div>
+                <div class="slider-thumb" style="--percent: 85%;">
+                    <div class="slider-value">0%</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Creative Field Section -->
+    <section id="creative-field">
+        
+        <!-- Z-Index 0: Background Blur (Opsi jika butuh, panggil gambar parallax di sini) -->
+        
+        <!-- Pembungkus Utama Creative Field -->
+        <div class="parallax cf-container" data-speed="0.2">
+            
+            <!-- Card 1: Instagram (Kiri Luar) -->
+            <div class="cf-card c-1 parallax" data-speed="0.4" onclick="window.open('https://instagram.com/Xtwosketch', '_blank')">
+                <div class="cf-header">
+                    <img src="assets/instagram.png" alt="Instagram" class="cf-icon">
+                    <span class="cf-username">Xtwosketch</span>
+                </div>
+                <img src="assets/Isiinstagram1.png" alt="Content" class="cf-image">
+            </div>
+
+            <!-- Card 2: Instagram (Kiri Dalam) -->
+            <div class="cf-card c-2 parallax" data-speed="0.1" onclick="window.open('https://instagram.com/Xtuz.inn', '_blank')">
+                <div class="cf-header">
+                    <img src="assets/instagram.png" alt="Instagram" class="cf-icon">
+                    <span class="cf-username">Xtuz.inn</span>
+                </div>
+                <img src="assets/Isiinstagram2.png" alt="Content" class="cf-image">
+            </div>
+
+            <!-- Card 3: SociaBuzz (Tengah) -->
+            <div class="cf-card c-3 parallax" data-speed="-0.3" onclick="window.open('https://sociabuzz.com/Xtuez/shop', '_blank')">
+                <div class="cf-header">
+                    <img src="assets/sociabuzz.png" alt="SociaBuzz" class="cf-icon">
+                    <span class="cf-username">Xtuez</span>
+                </div>
+                <img src="assets/Isisociabuzz.png" alt="Content" class="cf-image">
+            </div>
+
+            <!-- Card 4: TikTok (Kanan Dalam) -->
+            <div class="cf-card c-4 parallax" data-speed="0.1" onclick="window.open('https://www.tiktok.com/@xtz2nd', '_blank')">
+                <div class="cf-header">
+                    <img src="assets/tiktok.png" alt="TikTok" class="cf-icon">
+                    <span class="cf-username">xtuez_02</span>
+                </div>
+                <img src="assets/Isitiktok.png" alt="Content" class="cf-image">
+            </div>
+
+            <!-- Card 5: YouTube (Kanan Luar) -->
+            <div class="cf-card c-5 parallax" data-speed="0.4" onclick="window.open('https://youtube.com/@Xtuez', '_blank')">
+                <div class="cf-header">
+                    <img src="assets/youtube.png" alt="YouTube" class="cf-icon">
+                    <span class="cf-username">Xtuez</span>
+                </div>
+                <img src="assets/Isiyoutube.png" alt="Content" class="cf-image">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        
+        <!-- Wadah Scroll khusus Portfolio -->
+        <div class="portfolio-container">
+            
+            <!-- 1. After Effects (2 Tumpuk, Horizontal, Besar) -->
+            <div id="port-ae" class="port-category active">
+                <div class="stack-wrapper">
+                    <div class="wireframe wf-ae ae-bg">
+                        <!-- Tambahkan atribut playsinline, muted, loop jika ingin auto-play senyap. 
+                             Hilangkan jika ingin klik manual murni. -->
+                        <video src="assets/AE2.mp4" class="port-video" playsinline preload="metadata"></video>
+                    </div>
+                    <div class="wireframe wf-ae ae-fg">
+                        <video src="assets/AE1.mp4" class="port-video" playsinline preload="metadata"></video>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Illustrator (3 Tumpuk, Vertical 3:4) -->
+            <div id="port-ai" class="port-category">
+                <div class="stack-wrapper">
+                    <div class="wireframe wf-ai ai-3">
+                        <img src="assets/AI3.png" alt="Illustrator 3" class="port-img">
+                    </div>
+                    <div class="wireframe wf-ai ai-2">
+                        <img src="assets/AI2.png" alt="Illustrator 2" class="port-img">
+                    </div>
+                    <div class="wireframe wf-ai ai-1">
+                        <img src="assets/AI1.png" alt="Illustrator 1" class="port-img">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Photoshop (2 Tumpuk, Morphing Vertical & Horizontal) -->
+            <div id="port-ps" class="port-category">
+                <div class="stack-wrapper">
+                    <!-- PS2 (Horizontal) ditaruh di atas agar ter-render di belakang -->
+                    <div class="wireframe wf-ps ps-2">
+                        <img src="assets/PS2.png" alt="Photoshop 2" class="port-img">
+                    </div>
+                    <!-- PS1 (Vertical) ditaruh di bawah agar ter-render di depan -->
+                    <div class="wireframe wf-ps ps-1">
+                        <img src="assets/PS1.png" alt="Photoshop 1" class="port-img">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Figma (5 Tumpuk, 1 Horizontal & 4 Vertical) -->
+            <div id="port-figma" class="port-category">
+                <div class="stack-wrapper">
+                    <!-- Kartu 5 (Paling Belakang Awal - Vertical) -->
+                    <div class="wireframe wf-figma fg-5">
+                        <img src="assets/fg4.png" alt="Figma 4" class="port-img">
+                    </div>
+                    <!-- Kartu 4 (Vertical) -->
+                    <div class="wireframe wf-figma fg-4">
+                        <img src="assets/fg3.png" alt="Figma 3" class="port-img">
+                    </div>
+                    <!-- Kartu 3 (Vertical) -->
+                    <div class="wireframe wf-figma fg-3">
+                        <img src="assets/fg2.png" alt="Figma 2" class="port-img">
+                    </div>
+                    <!-- Kartu 2 (Vertical) -->
+                    <div class="wireframe wf-figma fg-2">
+                        <img src="assets/fg1.png" alt="Figma 1" class="port-img">
+                    </div>
+                    <!-- Kartu 1 (Paling Depan Awal - fgmain Horizontal) -->
+                    <div class="wireframe wf-figma fg-1">
+                        <img src="assets/fgmain.png" alt="Figma Main" class="port-img">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Ibis Paint (4 Berjajar Desktop, Vertical 3:4) -->
+            <div id="port-ibis" class="port-category">
+                <div class="stack-wrapper">
+                    <!-- Kartu 4 (Kiri Jauh) -->
+                    <div class="wireframe wf-ibis ib-4">
+                        <img src="assets/ip4.png" alt="Ibis Paint 4" class="port-img">
+                    </div>
+                    <!-- Kartu 3 (Kanan) -->
+                    <div class="wireframe wf-ibis ib-3">
+                        <img src="assets/ip3.png" alt="Ibis Paint 3" class="port-img">
+                    </div>
+                    <!-- Kartu 2 (Kiri) -->
+                    <div class="wireframe wf-ibis ib-2">
+                        <img src="assets/ip2.png" alt="Ibis Paint 2" class="port-img">
+                    </div>
+                    <!-- Kartu 1 (Tengah/Depan) -->
+                    <div class="wireframe wf-ibis ib-1">
+                        <img src="assets/ip1.png" alt="Ibis Paint 1" class="port-img">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Blender (3 Berjajar Horizontal Desktop, Vertical Mobile) -->
+            <div id="port-blender" class="port-category">
+                <div class="stack-wrapper">
+                    <!-- Kartu Kiri (Desktop) / Atas (Mobile) -->
+                    <div class="wireframe wf-blend bl-3">
+                        <img src="assets/blend3.png" alt="Blender 3" class="port-img">
+                    </div>
+                    <!-- Kartu Kanan (Desktop) / Bawah (Mobile) -->
+                    <div class="wireframe wf-blend bl-2">
+                        <img src="assets/blend2.png" alt="Blender 2" class="port-img">
+                    </div>
+                    <!-- Kartu Tengah / Terdepan -->
+                    <div class="wireframe wf-blend bl-1">
+                        <img src="assets/blend1.png" alt="Blender 1" class="port-img">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. Alight Motion (1 Video Horizontal 16:9) -->
+            <div id="port-am" class="port-category">
+                <div class="stack-wrapper">
+                    <div class="wireframe wf-am am-1">
+                        <video src="assets/am1.mp4" class="port-video" playsinline preload="metadata" autoplay loop muted></video>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. OBS (3 Tumpuk, Vertical 9:16) -->
+            <div id="port-obs" class="port-category">
+                <div class="stack-wrapper">
+                    <!-- Kartu Paling Belakang (Video obs3.mp4) -->
+                    <div class="wireframe wf-obs ob-3">
+                        <video src="assets/obs3.mp4" class="port-video" playsinline preload="metadata" autoplay loop muted></video>
+                    </div>
+                    <!-- Kartu Tengah -->
+                    <div class="wireframe wf-obs ob-2">
+                        <img src="assets/obs2.png" alt="OBS 2" class="port-img">
+                    </div>
+                    <!-- Kartu Depan -->
+                    <div class="wireframe wf-obs ob-1">
+                        <img src="assets/obs1.png" alt="OBS 1" class="port-img">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+<script>
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll("nav ul li a");
+        const indicator = document.querySelector(".nav-indicator");
+
+        // Deklarasikan variabel timer di luar agar bisa dibatalkan jika user keburu pindah tab
+        let expandTimeout1;
+        let expandTimeout2;
+
+        // Fungsi mengatur lebar dan posisi garis mengikuti elemen yang dipilih
+        function moveIndicator(element) {
+            if (element) {
+                // Selalu batalkan timer sebelumnya
+                clearTimeout(expandTimeout1); 
+                clearTimeout(expandTimeout2); 
+                
+                // 1. Kembalikan ke bentuk garis merah standar setiap kali pindah tab
+                indicator.classList.remove("expand");
+                indicator.classList.remove("shrink-dot");
+                
+                // Transisi standar yang mulus (Tanpa Overshoot) saat pindah antar tab biasa
+                indicator.style.transition = "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
+                
+                indicator.style.width = `${element.offsetWidth}px`;
+                indicator.style.left = `${element.offsetLeft}px`;
+
+                // 2. Jika tab aktif adalah Portfolio
+                if (element.getAttribute("href") === "#portfolio") {
+                    
+                    // TAHAP 1: Anticipation (Menyusut menjadi titik)
+                    expandTimeout1 = setTimeout(() => {
+                        indicator.classList.add("shrink-dot");
+                        
+                        let centerOfText = element.offsetLeft + (element.offsetWidth / 2);
+                        let dotSize = 8;
+                        
+                        // Kurva Ease-In-Out biasa (Sama sekali TANPA Overshoot agar tidak patah)
+                        indicator.style.transition = "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)";
+                        indicator.style.width = `${dotSize}px`;
+                        indicator.style.left = `${centerOfText - (dotSize / 2)}px`;
+                    }, 1000);
+
+                    // TAHAP 2: Overlapping Action (Membesar)
+                    expandTimeout2 = setTimeout(() => {
+                        indicator.classList.remove("shrink-dot");
+                        indicator.classList.add("expand");
+                        
+                        let isMobile = window.innerWidth <= 768;
+                        let expandedWidth = isMobile ? 50 : 340; 
+                        
+                        if (!isMobile) {
+                            // Desktop: Kalkulasi titik tengah layar berdasarkan container "ul"
+                            let ulContainer = element.closest('ul');
+                            let centerOfUl = ulContainer.offsetWidth / 2;
+                            indicator.style.left = `${centerOfUl - (expandedWidth / 2)}px`;
+                        } else {
+                            // Mobile: Tetap bergantung pada titik tengah ikon
+                            let centerOfText = element.offsetLeft + (element.offsetWidth / 2);
+                            indicator.style.left = `${centerOfText - (expandedWidth / 2)}px`;
+                        }
+
+                        // KUNCI: Kurva Overshoot eksklusif hanya untuk ledakan terakhir
+                        indicator.style.transition = "all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)"; 
+                        indicator.style.width = `${expandedWidth}px`;
+                        
+                    }, 1200); 
+                }
+            }
+        }
+
+        // ========================================================
+        // --- SINKRONISASI NAVIGASI & POSISI SCROLL ---
+        // ========================================================
+        const parallaxElements = document.querySelectorAll(".parallax");
+
+        // 1. Buat fungsi khusus untuk mendeteksi posisi layar saat ini
+        function syncActiveTab() {
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                // Kalkulasi apakah posisi scroll sudah memasuki area section ini
+                if (window.pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            // Fallback: Jika tidak terdeteksi (paling atas), paksa ke home
+            if (!current) current = "home";
+
+            // Bersihkan semua efek aktif, lalu berikan hanya ke tab yang sesuai posisi layar
+            navLinks.forEach(link => {
+                link.classList.remove("active");
+                if (link.getAttribute("href").includes(current)) {
+                    link.classList.add("active");
+                    moveIndicator(link); // Pindahkan garis merah / pil ke sini
+                }
+            });
+        }
+
+        // 2. Eksekusi fungsi di atas saat web PERTAMA KALI dimuat (atau di-refresh)
+        // Kita gunakan 'load' agar browser selesai mengatur ulang posisi scroll terakhirmu
+        window.addEventListener("load", () => {
+            setTimeout(() => {
+                syncActiveTab(); // Sinkronkan tab yang menyala
+                window.dispatchEvent(new Event('scroll')); // Pancing event scroll agar elemen Parallax tidak bug
+            }, 100); 
+        });
+
+        // 3. Eksekusi fungsi secara realtime saat kamu men-scroll layar
+        window.addEventListener("scroll", () => {
+            syncActiveTab();
+
+            // --- FUNGSI FAKE 3D / PARALLAX ---
+            parallaxElements.forEach(el => {
+                let speed = el.getAttribute("data-speed");
+                let parentSection = el.closest("section");
+                
+                if (parentSection) {
+                    let distance = window.scrollY - parentSection.offsetTop;
+                    el.style.transform = `translateY(${distance * speed}px)`;
+                }
+            });
+        });
+        // --- CUSTOM SMOOTH SCROLL (ANIMASI MAGNET REALTIME) ---
+        let isScrolling = false;
+
+        // Fungsi matematis untuk membuat animasi pergeseran (easing)
+        function smoothScrollTo(targetPosition, duration) {
+            const startPosition = window.pageYOffset;
+            const distance = targetPosition - startPosition;
+            let startTime = null;
+
+            function animation(currentTime) {
+                if (startTime === null) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                
+                // Rumus easeOutCubic: pergerakan cepat di awal, melambat di akhir (efek magnet)
+                const progress = Math.min(timeElapsed / duration, 1);
+                const ease = 1 - Math.pow(1 - progress, 3);
+                
+                window.scrollTo(0, startPosition + distance * ease);
+
+                if (timeElapsed < duration) {
+                    requestAnimationFrame(animation);
+                } else {
+                    isScrolling = false; // Buka kunci scroll setelah animasi benar-benar selesai
+                }
+            }
+            requestAnimationFrame(animation);
+        }
+
+        window.addEventListener('wheel', (e) => {
+            e.preventDefault(); // Matikan scroll bawaan mouse
+            if (isScrolling) return; // Cegah tabrakan animasi
+
+            let direction = e.deltaY > 0 ? 1 : -1;
+            let currentSectionIndex = 0;
+            let minDistance = Infinity;
+
+            sections.forEach((sec, index) => {
+                let distance = Math.abs(sec.getBoundingClientRect().top);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    currentSectionIndex = index;
+                }
+            });
+
+            let targetIndex = currentSectionIndex + direction;
+
+            // Eksekusi animasi jika tab selanjutnya ada
+            if (targetIndex >= 0 && targetIndex < sections.length) {
+                isScrolling = true;
+                let targetPosition = sections[targetIndex].offsetTop;
+                
+                // Angka 800 adalah durasi pergeseran dalam milidetik (0.8 detik)
+                smoothScrollTo(targetPosition, 800); 
+            }
+        }, { passive: false });
+        // --- KLIK & TOUCH NAVIGASI INSTAN (BEBAS DELAY) ---
+        navLinks.forEach(link => {
+            const moveToSection = (e) => {
+                e.preventDefault(); // Matikan lompatan kasar HTML
+                e.stopPropagation(); // Cegah bentrok dengan script swipe layar
+                
+                if (isScrolling) return; 
+
+                const targetId = link.getAttribute('href').replace('#', '');
+                const targetSection = document.getElementById(targetId);
+
+                if (targetSection) {
+                    isScrolling = true;
+                    smoothScrollTo(targetSection.offsetTop, 800);
+                }
+            };
+
+            // Event untuk mouse (PC)
+            link.addEventListener('click', moveToSection);
+            
+            // Event khusus layar sentuh (HP), bereaksi instan milidetik itu juga tanpa menunggu hover
+            link.addEventListener('touchstart', moveToSection, { passive: false });
+        });
+        // --- CUSTOM REALTIME SWIPE & MAGNET SNAP (MOBILE) ---
+        let touchStartY = 0;
+        let initialScrollY = 0;
+        let isDragging = false;
+        let startSectionIndex = 0;
+
+        // 1. Deteksi posisi awal saat jari menyentuh layar
+        window.addEventListener('touchstart', (e) => {
+            // Cegah sentuhan baru jika efek magnet berjalan ATAU jika yang disentuh adalah area navigasi
+            if (isScrolling || e.target.closest('nav')) return; 
+            
+            touchStartY = e.touches[0].screenY;
+            initialScrollY = window.scrollY;
+            isDragging = true;
+            
+            // Cari tahu kita sedang berada di section mana saat jari menyentuh
+            let minDistance = Infinity;
+            sections.forEach((sec, index) => {
+                let distance = Math.abs(sec.getBoundingClientRect().top);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    startSectionIndex = index;
+                }
+            });
+        }, { passive: true });
+
+        // 2. Geser layar secara REALTIME saat jari digerakkan
+        window.addEventListener('touchmove', (e) => {
+            if (!isDragging || isScrolling) return;
+            e.preventDefault(); // Matikan scroll bawaan HP agar mulus
+
+            let currentY = e.touches[0].screenY;
+            let deltaY = touchStartY - currentY; 
+            
+            // Eksekusi pergerakan layar seketika itu juga (mengikuti jari)
+            window.scrollTo(0, initialScrollY + deltaY);
+        }, { passive: false });
+
+        // 3. Efek Magnet/Snappy saat jari dilepaskan
+        window.addEventListener('touchend', (e) => {
+            if (!isDragging || isScrolling) return;
+            isDragging = false;
+
+            let touchEndY = e.changedTouches[0].screenY;
+            let swipeDistance = touchStartY - touchEndY;
+
+            // Cari section mana yang paling dekat dengan posisi layar saat dilepas
+            let targetIndex = 0;
+            let minDistance = Infinity;
+
+            sections.forEach((sec, index) => {
+                let distance = Math.abs(sec.getBoundingClientRect().top);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    targetIndex = index;
+                }
+            });
+
+            // Logika "Snappy": Jika di-swipe lumayan kencang (lebih dari 50px) 
+            // tapi posisi jari belum mencapai setengah layar, paksa pindah ke section sebelahnya.
+            if (Math.abs(swipeDistance) > 50) {
+                let direction = swipeDistance > 0 ? 1 : -1; // 1 (Bawah) atau -1 (Atas)
+                if (targetIndex === startSectionIndex) {
+                    targetIndex = startSectionIndex + direction;
+                }
+            }
+
+            // Pastikan tidak nge-bug ke section yang tidak ada (out of bounds)
+            targetIndex = Math.max(0, Math.min(sections.length - 1, targetIndex));
+
+            // Eksekusi tarikan magnet terakhir ke target tab
+            isScrolling = true;
+            let targetPosition = sections[targetIndex].offsetTop;
+            
+            // Durasi diubah jadi 600ms agar efek kembalinya terasa lebih 'snappy' dan cepat
+            smoothScrollTo(targetPosition, 600); 
+        });
+        // --- INFINITY HORIZONTAL SCROLL (CREATIVE FIELD) ---
+        const cfCards = document.querySelectorAll('.cf-card');
+        const cfClasses = ['c-1', 'c-2', 'c-3', 'c-4', 'c-5'];
+        const cfSpeeds = ['0.4', '0.1', '-0.3', '0.1', '0.4']; 
+        let cfIndexOffset = 0;
+        let isCarouselScrolling = false;
+        let cfAutoSlideTimer; // Variabel untuk menyimpan timer otomatis
+
+        function updateCFCarousel() {
+            cfCards.forEach((card, i) => {
+                cfClasses.forEach(c => card.classList.remove(c));
+                let pos = ((i + cfIndexOffset) % 5 + 5) % 5;
+                card.classList.add(cfClasses[pos]);
+                card.setAttribute('data-speed', cfSpeeds[pos]);
+            });
+        }
+
+        // --- FUNGSI AUTO-SLIDE TIAP 3 DETIK ---
+        function startCFAutoSlide() {
+            stopCFAutoSlide(); // Mencegah double timer
+            cfAutoSlideTimer = setInterval(() => {
+                if (!isCarouselScrolling) {
+                    cfIndexOffset--; // Geser carousel 1 langkah
+                    updateCFCarousel();
+                }
+            }, 3000); // 3000 milidetik = 3 detik
+        }
+
+        function stopCFAutoSlide() {
+            clearInterval(cfAutoSlideTimer);
+        }
+
+        // Nyalakan auto-slide saat web pertama dimuat
+        startCFAutoSlide();
+
+        const cfContainer = document.querySelector('.cf-container');
+
+        // A. DETEKSI MOUSE WHEEL (PC) DENGAN PEMISAHAN HOVER
+        cfContainer.addEventListener('wheel', (e) => {
+            // Jika kursor TIDAK berada di atas gambar (.cf-card), biarkan layar pindah tab atas/bawah
+            if (!e.target.closest('.cf-card')) {
+                return; 
+            }
+
+            // Jika kursor tepat di atas gambar, putar carousel dan tahan layar
+            e.preventDefault(); 
+            e.stopPropagation(); 
+            
+            if (isCarouselScrolling) return;
+
+            stopCFAutoSlide(); // Jeda auto-slide karena user sedang interaksi manual
+
+            let direction = 0;
+            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+                direction = e.deltaX > 0 ? 1 : -1;
+            } else {
+                direction = e.deltaY > 0 ? 1 : -1;
+            }
+
+            cfIndexOffset -= direction;
+            updateCFCarousel();
+
+            isCarouselScrolling = true;
+            setTimeout(() => { 
+                isCarouselScrolling = false; 
+                startCFAutoSlide(); // Lanjut auto-slide setelah selesai interaksi
+            }, 500); 
+        }, { passive: false });
+
+
+        // B. DETEKSI SWIPE (MOBILE) DENGAN PEMISAHAN SUMBU X & Y
+        let cfTouchStartX = 0;
+        let cfTouchStartY = 0;
+        let cfIsSwiping = false;
+        let cfSwipeDirection = ''; // Penanda arah: 'horizontal' atau 'vertical'
+
+        cfContainer.addEventListener('touchstart', (e) => {
+            if (isCarouselScrolling) return;
+            
+            cfTouchStartX = e.touches[0].screenX;
+            cfTouchStartY = e.touches[0].screenY;
+            cfIsSwiping = true;
+            cfSwipeDirection = ''; 
+            
+            stopCFAutoSlide(); // Jeda auto-slide saat disentuh
+        }, { passive: true });
+
+        cfContainer.addEventListener('touchmove', (e) => {
+            if (!cfIsSwiping) return;
+
+            let currentX = e.touches[0].screenX;
+            let currentY = e.touches[0].screenY;
+            
+            let diffX = Math.abs(cfTouchStartX - currentX);
+            let diffY = Math.abs(cfTouchStartY - currentY);
+
+            // Menentukan niat jari user pada pergerakan milidetik pertama
+            if (cfSwipeDirection === '') {
+                if (diffX > diffY && diffX > 5) {
+                    cfSwipeDirection = 'horizontal';
+                } else if (diffY > diffX && diffY > 5) {
+                    cfSwipeDirection = 'vertical';
+                }
+            }
+
+            // Jika geser kiri/kanan -> kunci layar, putar gambar
+            if (cfSwipeDirection === 'horizontal') {
+                e.preventDefault(); 
+                e.stopPropagation(); 
+            } 
+            // JIKA GESER ATAS/BAWAH -> Abaikan, biarkan script Magnet Snap utama yang pindah tab!
+            
+        }, { passive: false });
+
+        cfContainer.addEventListener('touchend', (e) => {
+            if (!cfIsSwiping) return;
+            cfIsSwiping = false;
+
+            let cfTouchEndX = e.changedTouches[0].screenX;
+            let cfTouchEndY = e.changedTouches[0].screenY;
+            
+            let diffX = cfTouchStartX - cfTouchEndX;
+
+            // Eksekusi putaran gambar jika swipe-nya horizontal dan cukup panjang (> 30px)
+            if (cfSwipeDirection === 'horizontal' && Math.abs(diffX) > 30) {
+                e.stopPropagation();
+                let direction = diffX > 0 ? 1 : -1;
+                cfIndexOffset -= direction;
+                updateCFCarousel();
+
+                isCarouselScrolling = true;
+                setTimeout(() => { 
+                    isCarouselScrolling = false; 
+                }, 500);
+            }
+            
+            // Nyalakan ulang auto-slide setelah jari diangkat
+            startCFAutoSlide();
+        });
+
+        // --- ANIMASI SLIDER SKILL (INTERSECTION OBSERVER) ---
+        const skillSliders = document.querySelectorAll('.slider-item');
+        const skillSection = document.getElementById('skill');
+
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    skillSliders.forEach((slider, index) => {
+                        // 1. Jalankan animasi CSS (lebar bar & pergerakan thumb)
+                        slider.classList.add('animate-slider');
+                        
+                        // 2. Jalankan animasi angka naik (Counter JS)
+                        const valueEl = slider.querySelector('.slider-value');
+                        if (valueEl) {
+                            // Ambil target persentase asli dari HTML
+                            const targetStr = slider.querySelector('.slider-thumb').style.getPropertyValue('--percent');
+                            const target = parseInt(targetStr);
+                            
+                            // Sinkronisasi delay JS dengan delay CSS (0.1s, 0.2s, dst)
+                            const delay = (index + 1) * 100; 
+                            
+                            setTimeout(() => {
+                                let startTime = null;
+                                const duration = 1200; // 1.2s (Sama persis dengan durasi keyframe CSS!)
+
+                                function updateNumber(currentTime) {
+                                    if (!startTime) startTime = currentTime;
+                                    const timeElapsed = currentTime - startTime;
+                                    const progress = Math.min(timeElapsed / duration, 1);
+                                    
+                                    // Rumus perlambatan (Ease-out) agar angka melambat di akhir
+                                    const ease = 1 - Math.pow(1 - progress, 3);
+                                    let currentVal = Math.floor(ease * target);
+
+                                    // Fake Overshoot: Lebihkan angka sedikit (1-3%) di tengah animasi agar sinkron dengan bar
+                                    if (progress > 0.6 && progress < 0.9) {
+                                        currentVal = target + Math.floor(Math.random() * 4); 
+                                    } else if (progress >= 0.9) {
+                                        currentVal = target;
+                                    }
+
+                                    valueEl.innerText = currentVal + '%';
+
+                                    if (progress < 1) {
+                                        requestAnimationFrame(updateNumber);
+                                    } else {
+                                        valueEl.innerText = target + '%';
+                                    }
+                                }
+                                requestAnimationFrame(updateNumber);
+                            }, delay);
+                        }
+                    });
+                } else {
+                    // Reset animasi & angka ke 0 saat tab tertutup/keluar dari layar
+                    skillSliders.forEach(slider => {
+                        slider.classList.remove('animate-slider');
+                        const valueEl = slider.querySelector('.slider-value');
+                        if (valueEl) valueEl.innerText = '0%';
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        if (skillSection) {
+            skillObserver.observe(skillSection);
+        }
+        // --- LOGIKA SUBTAB PORTFOLIO & FINITE SCROLL ---
+        const portIcons = document.querySelectorAll('.port-icon');
+        const portCategories = document.querySelectorAll('.port-category');
+        
+        // Buat urutan ID subtab agar sistem tahu tab mana yang selanjutnya/sebelumnya
+        const subtabIds = Array.from(portCategories).map(cat => cat.id); 
+        
+        // Objek untuk menyimpan fungsi reset posisi kartu untuk masing-masing tab
+        const tabResets = {};
+
+        // Fungsi khusus untuk menyalakan subtab, menyimpan ke memori, dan me-reset kartunya
+        function setActiveSubtab(targetId) {
+            portIcons.forEach(i => i.classList.remove('active-icon'));
+            portCategories.forEach(c => c.classList.remove('active'));
+            
+            const selectedIcon = document.querySelector(`.port-icon[data-target="${targetId}"]`);
+            const selectedCategory = document.getElementById(targetId);
+            
+            if (selectedIcon && selectedCategory) {
+                selectedIcon.classList.add('active-icon');
+                selectedCategory.classList.add('active');
+                
+                localStorage.setItem('savedPortTab', targetId);
+                
+                // PENTING: Kembalikan tumpukan kartu ke posisi awal setiap kali tab dibuka
+                if (tabResets[targetId]) {
+                    tabResets[targetId]();
+                }
+            }
+        }
+
+        // Jalankan fungsi saat ikon diklik manual
+        portIcons.forEach(icon => {
+            icon.addEventListener('click', () => {
+                setActiveSubtab(icon.getAttribute('data-target'));
+            });
+        });
+
+        // --- LOGIKA INTERAKSI KARTU & PINDAH SUBTAB OTOMATIS ---
+        portCategories.forEach((category, categoryIndex) => {
+            let isCategoryScrolling = false;
+            
+            // Cari pembungkus kartu (Abaikan jika tab hanya punya 1 item spt Photoshop)
+            const wrapper = category.querySelector('.stack-wrapper');
+            const cards = wrapper ? Array.from(wrapper.children) : [];
+            
+            // Tangkap wujud asli urutan class saat web dimuat
+            let initialClasses = cards.map(card => card.classList[card.classList.length - 1]);
+            let positionClasses = [...initialClasses];
+            const frontClass = initialClasses.length > 0 ? initialClasses[initialClasses.length - 1] : '';
+            
+            // PENGHITUNG LANGKAH (Untuk mematikan Infinity Loop)
+            let currentStep = 0;
+            // Batas maksimal scroll adalah jumlah kartu dikurangi 1
+            let maxStep = Math.max(0, cards.length - 1); 
+
+            // Mendaftarkan fungsi reset untuk tab ini agar dipanggil oleh setActiveSubtab()
+            tabResets[category.id] = () => {
+                if (cards.length === 0) return;
+                
+                currentStep = 0; // Reset langkah
+                positionClasses = [...initialClasses]; // Reset memori class
+                
+                cards.forEach((card, index) => {
+                    // Hapus semua class posisi dan terapkan ulang posisi awal
+                    initialClasses.forEach(cls => card.classList.remove(cls));
+                    card.classList.add(positionClasses[index]);
+                    
+                    // Matikan video jika kartu ter-reset ke belakang
+                    const video = card.querySelector('video');
+                    if (video && !card.classList.contains(frontClass)) {
+                        video.pause();
+                    }
+                });
+            };
+
+            // FUNGSI KLIK MANUAL UNTUK PLAY/PAUSE VIDEO
+            cards.forEach(card => {
+                card.addEventListener('click', (e) => {
+                    e.stopPropagation(); 
+                    const video = card.querySelector('video');
+                    if (video && card.classList.contains(frontClass)) {
+                        if (video.paused) video.play();
+                        else video.pause();
+                    }
+                });
+            });
+
+            // FUNGSI MUTAR KARTU
+            function cycleCards(direction) {
+                if (cards.length <= 1) return;
+
+                if (direction > 0) {
+                    positionClasses.unshift(positionClasses.pop()); 
+                } else {
+                    positionClasses.push(positionClasses.shift()); 
+                }
+                
+                cards.forEach((card, index) => {
+                    initialClasses.forEach(cls => card.classList.remove(cls));
+                    card.classList.add(positionClasses[index]);
+                    
+                    const video = card.querySelector('video');
+                    if (video && !card.classList.contains(frontClass)) {
+                        video.pause(); 
+                    }
+                });
+            }
+
+            // FUNGSI PENGENDALI ARAH (Menghitung langkah atau Pindah Tab)
+            function handleScroll(direction) {
+                if (direction > 0) {
+                    // SCROLL KE BAWAH
+                    if (currentStep < maxStep) {
+                        currentStep++;       // Maju 1 langkah
+                        cycleCards(direction); // Putar kartu ke depan
+                    } else {
+                        // KARTU SUDAH MENTOK! Pindah ke subtab KANAN (Selanjutnya)
+                        if (categoryIndex < subtabIds.length - 1) {
+                            setActiveSubtab(subtabIds[categoryIndex + 1]);
+                        }
+                    }
+                } else {
+                    // SCROLL KE ATAS
+                    if (currentStep > 0) {
+                        currentStep--;       // Mundur 1 langkah
+                        cycleCards(direction); // Putar kartu ke belakang
+                    } else {
+                        // KARTU SUDAH MENTOK DI AWAL! Pindah ke subtab KIRI (Sebelumnya)
+                        if (categoryIndex > 0) {
+                            setActiveSubtab(subtabIds[categoryIndex - 1]);
+                        }
+                    }
+                }
+            }
+
+            // Jika tab tidak punya stack-wrapper (contoh: Photoshop), sensor ditempel langsung ke Category
+            let eventTarget = wrapper ? wrapper : category;
+
+            // TANGKAP SCROLL MOUSE (DESKTOP)
+            eventTarget.addEventListener('wheel', (e) => {
+                // Sensor: Hanya aktif jika kursor di atas kartu (.wireframe)
+                if (!e.target.closest('.wireframe')) return;
+
+                e.preventDefault(); 
+                e.stopPropagation(); 
+
+                if (isCategoryScrolling) return;
+
+                let direction = e.deltaY > 0 ? 1 : -1;
+                handleScroll(direction);
+
+                isCategoryScrolling = true;
+                setTimeout(() => { isCategoryScrolling = false; }, 500); 
+            }, { passive: false });
+
+            // TANGKAP SWIPE (MOBILE)
+            let startY = 0;
+            let isTouchingCard = false; 
+
+            eventTarget.addEventListener('touchstart', (e) => {
+                if (!e.target.closest('.wireframe')) {
+                    isTouchingCard = false;
+                    return; 
+                }
+                isTouchingCard = true;
+                e.stopPropagation(); 
+                startY = e.touches[0].screenY;
+            }, { passive: true });
+
+            eventTarget.addEventListener('touchmove', (e) => {
+                if (!isTouchingCard) return; 
+                e.preventDefault(); 
+                e.stopPropagation();
+            }, { passive: false });
+
+            eventTarget.addEventListener('touchend', (e) => {
+                if (!isTouchingCard) return;
+                e.stopPropagation();
+                isTouchingCard = false; 
+
+                if (isCategoryScrolling) return;
+
+                let endY = e.changedTouches[0].screenY;
+                let diffY = startY - endY;
+
+                if (Math.abs(diffY) > 30) {
+                    let direction = diffY > 0 ? 1 : -1;
+                    handleScroll(direction);
+                    
+                    isCategoryScrolling = true;
+                    setTimeout(() => { isCategoryScrolling = false; }, 500);
+                }
+            });
+        });
+
+        // KUNCI: Panggil tab yang tersimpan di memori saat baru refresh
+        const savedTab = localStorage.getItem('savedPortTab');
+        if (savedTab) {
+            setActiveSubtab(savedTab);
+        }
+    </script>
+</body>
+</html>
+    </script>
+</body>
+</html>
